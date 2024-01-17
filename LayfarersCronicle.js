@@ -954,18 +954,16 @@ FeatsList["(origin trait) grimalkin"] = {
 	'catwalk' : {
 		name : "Grimalkin (Catwalk)",
 		description : "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. Once you use this trait, you can’t do so again until you finish a short or long rest.",
-		"catwalk" : {
+		name : "Grimalkin (Catwalk)",
+		limfeaname : "Catwalk",
+		minlevel : 1,
+		usages : 1,
+		recovery : "short rest",
+		spellcastingBonus : {
 			name : "Catwalk",
-			limfeaname : "Misty Step",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			spellcastingBonus : {
-				name : "Catwalk",
-				spells : ["misty step"],
-				selection : ["misty step"],
-				firstCol : 'oncesr'
-			}
+			spells : ["misty step"],
+			selection : ["misty step"],
+			firstCol : 'oncesr'
 		}
 	}
 };
