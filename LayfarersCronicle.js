@@ -747,12 +747,12 @@ FeatsList["(origin trait) sun elf"] = {
 
 //LINEAGE
 
-FeatsList["(lineage trait) lineage"] = {
-	name : "(Lineage Trait) Lineage",
-	source : [["TPK", 4]],
+FeatsList["(lineage trait) blessed/cursed lineage"] = {
+	name : "(Lineage Trait) Blessed/Cursed Lineage",
+	source : [["TPK", 13]],
 	description : "",
 	allowDuplicates: false,
-	choices : [ 'Blessed Birth', 'Cursed Birth', 'Gift of the Cindergale', 'Gift of the Levintide', 'Gift of the Mindsire', 'Gift of the Mooneater', 'Gift of the Mourningstar', 'Gift of the Neverbeast', 'Gift of the Windrose' ],
+	choices : [ 'Blessed Birth', 'Cursed Birth',],
 	'blessed birth' : {
 		name : "Lineage (Blessed Birth)",
 		source : [["TPK", 13]],
@@ -780,7 +780,16 @@ FeatsList["(lineage trait) lineage"] = {
 			times : 1,
 			spellcastingAbility : 6
 		}]
-	},
+	}
+};
+
+FeatsList["(lineage trait) draconic lineage"] = {
+	name : "(Lineage Trait) DraconicLineage",
+	source : [["TPK", 14]],
+	description : "",
+	allowDuplicates: false,
+	choices : ['Gift of the Cindergale', 'Gift of the Levintide', 'Gift of the Mindsire', 'Gift of the Mooneater', 'Gift of the Mourningstar', 'Gift of the Neverbeast', 'Gift of the Windrose' ],
+
 	'gift of the cindergale' : {
 		name : "Lineage (Gift of the Cindergale)",
 		source : [["TPK", 14]],
@@ -795,7 +804,7 @@ FeatsList["(lineage trait) lineage"] = {
 	},
 	'gift of the mindsire' : {
 		name : "Lineage (Gift of the Mindsire)",
-		source : [["TPK", 14]],
+		source : [["TPK", 15]],
 		description : "You gain a number of charges equal to your proficiency bonus minus 1. As an action, spend any number of charges to gain a spell slot. The level of this spell slot is equal to the number of charges spent. When you take a long rest, you regain your spent charges and lose any spell slots created using this trait.",
 		action : [ "action", "Gift of the Mindsire"],
 		usages : "Proficiency bonus per ", 
@@ -804,7 +813,7 @@ FeatsList["(lineage trait) lineage"] = {
 	},
 	'gift of the mooneater' : {
 		name : "Lineage (Gift of the Mooneater)",
-		source : [["TPK", 14]],
+		source : [["TPK", 15]],
 		description : "You have the ability to communicate telepathically with creatures that can breathe underwater. In addition, when you roll a 1 on a damage die for a spell or ability that deals cold damage, you can reroll the die. You must use the new roll."
 	},
 	'gift of the mourningstar' : {
@@ -814,19 +823,137 @@ FeatsList["(lineage trait) lineage"] = {
 	},
 	'gift of the neverbeast' : {
 		name : "Lineage (Gift of the Neverbeast)",
-		source : [["TPK", 14]],
+		source : [["TPK", 15]],
 		description : "Spells and abilities that affect monstrosities also affect you. In addition, your spells and abilities that reference beasts also include monstrosities with an Intelligence score of 4 or less and monstrosities that don’t comprehend any languages.",
 		savetxt : {
 			text : ["Affected by Monstrosites spells/abilites"]
 		},
 	},
 	'gift of the windrose' : {
-		name : "Lineage (Gift of the Windrose.)",
-		source : [["TPK", 14]],
+		name : "Lineage (Gift of the Windrose)",
+		source : [["TPK", 15]],
 		description : "While singing, you have advantage on checks made to navigate through wilderness and to detect the presence of secret doors."
 	}
 };
 
+FeatsList["(lineage trait) Divine lineage"] = {
+	name : "(Lineage Trait) Divine Lineage",
+	source : [["TPK", 14]],
+	description : "",
+	allowDuplicates: false,
+	choices : ['Aspect of the Buried One', 'Aspect of the Burning One', 'Aspect of the Caged One', 'Aspect of the Sleeping One', 'Aspect of the Wandering One'  ],
+
+	'aspect of the buried one' : {
+		name : "Lineage (Aspect of the Buried One)",
+		source : [["TPK", 14]],
+		description : "Your fingertips and other extremities blacken, as if perpetually covered in charcoal. You can cast spells without material components, unless a material component is consumed by the spell.",
+	},
+	'aspect of the burning one' :{
+		name : "Lineage (Aspect of the Burning One)",
+		source : [["TPK", 14]],
+		description : "Your eyes are the color of fire, with red-orange sclera and yellow irises. When you deal bludgeoning, piercing, or slashing damage using a weapon attack, you can instead choose to deal fire damage.",
+		calcChanges : {
+			atkAdd : [
+				function (fields, v) {
+					if ((/piercing|bludgeoning|slashing/i).test(fields.Damage_Type)){
+						fields.Description += (fields.Description ? '; ' : '') + 'Can deal Fire damage instead';
+					};
+				},
+				"I can use fire damage instead of piercing, bludeoning, or slashing."
+			]
+		}
+	},
+	'aspect of the caged one' : {
+		name : "Lineage (Aspect of the Caged One)",
+		source : [["TPK", 14]],
+		description : "Scar-like spiral patterns cover your skin. When one of your attacks deals damage to a creature, reduce the target’s temporary hit points to zero before calculating damage. You can use this ability a number of times per long rest equal to your proficiency bonus.",
+		usages : "Proficiency bonus per ",
+		recovery : "long rest",
+	},
+	'aspect of the sleeping one' : {
+		name : "Lineage (Aspect of the Sleeping One)",
+		source : [["TPK", 14]],
+		description : "Flower buds grow in your hair. After you take a short rest, you regain one expended spell slot of your choice. The level of this spell slot must be less than or equal to your proficiency bonus.",
+	},
+	'aspect of the wandering one' : {
+		name : "Lineage (Aspect of the Wandering One)",
+		source : [["TPK", 14]],
+		description : "After you take a short rest, you can change your appearance/voice. You determine the specifics of the changes. You can adjust height/weight and change size between Medium/Small. You can as another ancestry. It must be an individual you have seen and you cannot change your pupil shape.",
+	}
+};
+
+FeatsList["(lineage trait) wyd-touched lineage"] = {
+	name : "(Lineage Trait) Wyd-touched",
+	source : [["TPK", 14]],
+	description : "",
+	allowDuplicates: false,
+	choices : ['Effortless Enchantment', 'Guarded Mind', 'Hybrid Flora', 'Unwavering Focus', 'Weald Walker'],
+	'effortless enchantment' : {
+		name : "Lineage (Effortless Enchantment)",
+		source : [["TPK", 15]],
+		description : "You can maintain concentration on two spells at once, provided that at least one is an enchantment spell. If you lose concentration for any reason, including failing a concentration check or becoming incapacitated, you lose concentration on both spells.",
+	},
+	'guarded mind' : {
+		name : "Lineage (Guarded Mind)",
+		source : [["TPK", 16]],
+		description : "You have advantage on saving throws against charm, memory loss, and other mind-altering effects.",
+		savetxt : { text : ["Adv. against charm, mem lost, mind effects"] }
+	},
+	'hybrid flora' : {
+		name : "Lineage (Hybrid Flora)",
+		source : [["TPK", 16]],
+		description : "Your spells and abilities that refer to beasts also refer to plants.",
+	},
+	'unwavering focus' : {
+		name : "Lineage (Unwavering Focus)",
+		source : [["TPK", 16]],
+		description : "While you aren’t maintaining concentration on any spells, your spell attack bonus and spell save DC are both increased by half of your proficiency bonus, rounded down. [Not calulated in sheet]",
+		calcChanges : {
+			atkCalc : [
+				function (fields, v, output) {
+					var profB = Number(How("Proficiency Bonus"));
+					if ((/.*unwavering attack.*/i).test(v.WeaponTextName) ){
+						output.extraHit = Math.floor(profB/2);
+					} else if ((/.*unwavering save dc.*/i).test(v.WeaponTextName) ){
+						output.extraHit = Math.floor(profB/2);
+					}
+				},
+				"I add my half my prof bonus (rounded down) when not concentrating."
+			],
+		},
+		weaponOptions : [
+		{
+			name : "Unwavering Attack",
+			baseWeapon : "unarmed strike",
+			regExpSearch : /unwavering attack/i,
+			isSpell: true,
+			description : "Only when not concentrating on spells",
+			useSpellcastingAbility : true,
+			damage : ["", "", ""],
+			range : "See Spell",
+		},
+		{
+			name : "Unwavering Save DC",
+			baseWeapon : "unarmed strike",
+			regExpSearch : /unwavering save dc/i,
+			isSpell: true,
+			dc : true,
+			description : "Only when not concentrating on spells",
+			damage : ["", "", ""],
+			useSpellcastingAbility : true,
+			range : "See Spell",
+		}
+		],
+		weaponsAdd : ["Unwavering Attack","Unwavering Save DC"]
+
+	},
+	'weald walker' : {
+		name : "Lineage (Weald Walker)",
+		source : [["TPK", 16]],
+		description : "In forested areas you are unaffected by difficult terrain due to plants, and you have advantage on saving throws and ability checks to avoid or escape being grappled by plants.",
+		savetxt : { text : ["Adv. against grapple from plants"] }
+	}
+};
 //GNOMES
 
 FeatsList["(ancestry trait) gnome"] = {
@@ -1328,6 +1455,7 @@ FeatsList["(ancestry trait) human"] = {
 	'irrepressible' : {
 		name : "Human (Irrepressible)",
 		description : "Choose an ability. You gain proficiency in saving throws using the chosen ability.",
+		savetxt: { text : ["Irrepressible: Prof in one extra saving throw"] }
 	},
 	'juke' : {
 		name : "Human (Juke)",
@@ -1345,6 +1473,125 @@ FeatsList["(ancestry trait) human"] = {
 		languageProfs : [1]
 	}
 };
+
+
+
+/*
+*
+*
+* SUBCLASSES
+*
+*/
+
+AddSubClass("paladin", "oath of the ivory knight", {
+	regExpSearch : /^(?=.*ivory)(?=.*knight).*$/i,
+	subname : "Oath of the Ivory Knight",
+	source : ["TPK", 21],
+	features : {
+		"subclassfeature3" : {
+			name : "Channel Divinity: Ward of Fangs",
+			source : [["TPK", 22]],
+			minlevel : 3,
+			description : "\n   " + "As a bonus action, you surround yourself with a radiant aura of divine fangs for 1 minute. If a creature ends their turn within 5 feet of you, you can choose to deal them 1d6 piercing damage. If this ability reduces a creature to zero hit points, you gain 5 temporary hit points + 1 per paladin level. Temporary hit points gained from this ability last until they're depleted or you finish a long rest.",
+			action : ["bonus action", ""],
+			spellcastingExtra : ["magic missile", "tasha’s hideous laughter", "gentle repose", "magic mouth", "hunger of hadar", "mass healing word", "aura of purity", "sickening radiance", "wall of stone", "holy weapon"]
+		},
+		"subclassfeature3.1" : {
+			name : "Channel Divinity: Blinding Smile",
+			source : [["TPK", 22]],
+			minlevel : 3,
+			description : "\n   " + "As a bonus action, you create a flash of blinding radiant light. Each creature of your choice within 30 feet of you must succeed on a Dexterity saving throw or be blinded for one minute.",
+			action : ["bonus action", ""]
+		},
+		"subclassfeature7" : {
+			name : "Pearly Aura",
+			source : [["TPK", 22]],
+			minlevel : 7,
+			description :"\n   " +  "You and friendly creatures within 10 feet of you have resistance to bludgeoning, piercing and slashing damage from non-magical attacks.",
+			additional : ["", "", "", "", "", "", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "30-foot aura", "30-foot aura", "30-foot aura"],
+			dmgres : [["Bludgeoning", "Bludg. (nonmagical)"], ["Piercing", "Pierc. (nonmagical)"], ["Slashing", "Slash. (nonmagical)"]]
+		},
+		"subclassfeature15" : {
+			name : "Jaws of Life",
+			source : [["TPK", 22]],
+			minlevel : 15,
+			description : "\n   " + "Once per long rest, if an ally within 30 feet of you is reduced to zero hit points, as a reaction, you can move up to your speed without provoking opportunity attacks and use Lay on Hands on that ally.",
+			action : ["reaction", ""],
+			usages: 1,
+			recovery : "long rest",
+
+		},
+		"subclassfeature20" : {
+			name : "Perfect Smile",
+			source : [["TPK", 22]],
+			minlevel : 20,
+			description : desc([
+				"\n   " + "As a bonus action, you can gain the following benefits for 1 minute once per long rest",
+				" \u2022 You gain a number of temporary hit points at the start of your turn equal to your paladin level plus your charisma modifier. These last until they're depleted or you finish a long rest.",
+				" \u2022 Hostile creatures that end their turn within 30 feet of you must succeed on a Dexterity saving throw against your spell save DC or be blinded for 1 minute.",
+				" \u2022 I assume the beast's HP and HD; I get mine back when I revert back",
+				" \u2022 As a bonus action, you can use Lay on Hands with a range of 30 feet.",
+				" \u2022 If you reduce a creature to zero hit points, your pool of healing regains a number of points equal to the creature’s challenge rating, rounded down. The total number of points in your pool of healing cannot exceed your paladin level x 5.",
+			]),
+			recovery : "long rest",
+			usages : 1,
+			action : ["bonus action", ""]
+		}
+	}
+});
+
+AddSubClass("warlock", "the lady of ivory", {
+	regExpSearch : /^(?=.*lady)(?=.*ivory).*$/i,
+	subname : "the Lady of Ivory",
+	source : [["TPK", 23]],
+	spellcastingExtra : ["ice knife", "tasha's hideous laughter", "cloud of daggers", "magic mouth", "revivify,", "speak with dead", "fabricate", "blight", "raise dead", "antilife shell"],
+	features : {
+		"subclassfeature1" : {
+			name : "Bonus Cantrips",
+			source : [["P", 61]],
+			minlevel : 1,
+			description : "\n   " + "I learn the Word of Radiance and Friends cantrip if I didn't already know it",
+			spellcastingBonus : {
+				name : "Bonus Cantrips (Ivory)",
+				spells : ["word of radiance", "friends"],
+				selection : ["word of radiance", "friends"]
+			}
+		},
+		"subclassfeature1.1" : {
+			name : "Arcane Fangs",
+			source : [["TPK", 23]],
+			minlevel : 1,
+			description : "\n   " + "When you cast a spell that deals fire, cold, thunder, lightening or acid damage, I can change the damage type to piercing."
+		},
+		"subclassfeature1.2" : {
+			name : "Tooth Taker",
+			source : [["TPK", 24]],
+			minlevel : 1,
+			description : "\n   " + "I can use the tooth of a creature of CR 1 or higher in place of any spell component up to 500 gold in value if they’re still alive or have been dead for less than a day. The tooth vanishes upon being used in this way, as it is transported to the Lady of Ivory’s collection, and the material cost of the spell is waived."
+		},
+		"subclassfeature6" : {
+			name : "Many Mouths",
+			source : [["TPK", 24]],
+			minlevel : 6,
+			description : "\n   " + "while holding the tooth of a creature, you can understand any of its spoken languages but do not gain the ability to speak them.",
+		},
+		"subclassfeature10" : {
+			name : "Deep Roots",
+			source : [["TPK", 24]],
+			minlevel : 10,
+			description : "\n   " + "I am immune to being knocked prone or pushed. In addition, I can use my movement action to move up to my speed by teleporting myself to a location I can see.",
+		},
+		"subclassfeature14" : {
+			name : "Enamel Grafting",
+			source : [["TPK", 24]],
+			minlevel : 14,
+			description : "\n   " + "I gain resistance to piercing, bludgeoning and slashing damage from nonmagical attacks.",
+			dmgres : [["Bludgeoning", "Bludg. (nonmagical)"], ["Piercing", "Pierc. (nonmagical)"], ["Slashing", "Slash. (nonmagical)"]]
+		}
+	}
+});
+
+
 
 /*
 *
