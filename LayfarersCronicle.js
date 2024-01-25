@@ -1548,11 +1548,12 @@ AddSubClass("warlock", "the lady of ivory", {
 	features : {
 		"subclassfeature1" : {
 			name : "Bonus Cantrips",
-			source : [["P", 61]],
+			source : [["TPK", 23]],
 			minlevel : 1,
 			description : "\n   " + "I learn the Word of Radiance and Friends cantrip if I didn't already know it",
 			spellcastingBonus : {
 				name : "Bonus Cantrips (Ivory)",
+				times : 2,
 				spells : ["word of radiance", "friends"],
 				selection : ["word of radiance", "friends"]
 			}
