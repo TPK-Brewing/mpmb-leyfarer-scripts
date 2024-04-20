@@ -1630,7 +1630,7 @@ AddSubClass("bard", "college of calamity", {
 				"the damage by 1d6 plus your charisma modifier. Usages: 1 plus your charisma modifier",
 				"per long rest. After you activate your last use of this ability, your next attack roll,",
 				"ability check or saving throw is made at disadvantage as luck catches up with you.",
-			])
+			]),
 			recovery : "long rest",
 			usages : "Charisma modifier per ",
 			usagescalc : "event.value = Math.max(1, What('Cha Mod')) + 1;",
