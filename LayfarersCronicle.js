@@ -594,6 +594,57 @@ AddRacialVariant("birdfolk", "mixed lineage", {
 	]),
 });
 
+//SNAILFOLK
+
+RaceList["snailfolk"] = {
+	regExpSearch : /^(?=.*snailfolk).*$/i,
+	name : "Snailfolk",
+    sortname : "(TPK) Snailfolk",
+	source : [["TPK", 17]],
+	plural : "Snailfolk",
+	size : 4,
+	speed : {
+		walk : { spd : 20, enc : 10 }
+	},
+	languageProfs : ["Common", 'Sneklik'],
+	scorestxt : "+2/+1 to two ability scores or +1/+1/+1 to three ability scores of my choice",
+	trait : "Snailfolk (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Traits. I can choose three traits. Select in the Feats section\n   on Page 3/4.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Snailfolk",
+		"   - (Lineage Trait) Lineage",
+	]),
+    eval : function () {
+		AddString('Feat Note 2', 'Snailfolk Ancestry Trait 1', '; ');
+		AddString('Feat Note 3', 'Snailfolk Ancestry Trait 2', '; ');
+		AddString('Feat Note 4', 'Snailfolk Ancestry Trait 3', '; ');
+	},
+	
+	removeeval : function () {
+		RemoveFeat("Snailfolk");
+		RemoveFeat("Snailfolk");
+		RemoveFeat("Snailfolk");	
+		RemoveFeat("Lineage");
+	 	RemoveString('Feat Note 2', 'Snailfolk Ancestry Trait 1');
+		RemoveString('Feat Note 3', 'Snailfolk Ancestry Trait 2');
+		RemoveString('Feat Note 4', 'Snailfolk Ancestry Trait 3');
+	}
+};
+
+AddRacialVariant("Snailfolk", "mixed lineage", {
+	regExpSearch : /mixed/i,
+	name : "Mixed Snailfolk Lineage",
+	source : [["TPK", 14]],
+	plural : "Mixed Lineage",
+	trait : "Mixed Snailfolk Lineage (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Mixed Traits. I can choose three traits. Select in the Feats section\n   on Page 3/4.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Snailfolk",
+		"   - (Lineage Trait) Lineage",
+		"   - Any trait from one other ancestry",
+	]),
+});
+
 
 
 /*
@@ -1043,7 +1094,9 @@ FeatsList["(ancestry trait) catfolk"] = {
 				"I use Strength instead of Dex for heavy ranged weapons."
 			]
 		},
-		climb : { spd : "walk", enc : 0 },
+		speed : {
+			climb : { spd : "walk", enc : 0 },
+		}
 	},
 	'darkvision' : {
 		name : "Catfolk (Darkvision)",
@@ -1474,6 +1527,58 @@ FeatsList["(ancestry trait) human"] = {
 	}
 };
 
+FeatsList["(ancestry trait) snailfolk"] = {
+	name : "(Ancestry Trait) Snailfolk",
+	source : [["TPK", 17]],
+	description : "",
+	prerequisite : "Snailfolk Ancestry",
+	allowDuplicates: true,
+	prereqeval : function(v) {
+		return CurrentRace.known.indexOf('snailfolk') !== -1 || 
+		CurrentFeats.known.indexOf("adaptable trait") !== -1||
+		CurrentRace.variant.indexOf('mixed lineage') !== -1;
+	},
+	choices : [ 'Boneless', 'Molluscan Mastery', 'Mucus Coat', 'Quick Withdraw' , 'Slime Trail', 'Wall Crawler' ],
+	'boneless' : {
+		name : "Snailfolk (Boneless)",
+		description : "You are resistant to nonmagical bludgeoning damage, and you have advantage on ability checks to escape being grappled or restrained.",
+		dmgres : [
+			["Bludgeoning", "Bludg. (nonmagical)"],
+		],
+		savetxt : { text : ["Adv. on saves to escape grapple/restrained"] } 
+	},
+	'molluscan mastery' : {
+		name : "Snailfolk (Molluscan Mastery)",
+		description : "Choose a tool proficiency.If you are already proficient in the chosen tool, you gain expertise in it instead, which means your proficiency bonus is doubled for any ability checks you make. You cannot benefit from other features that also double your proficiency bonus for the chosen tool.",
+		toolProfs : ["from Molluscan Mastery", 1],
+	},
+	'mucus coat' : {
+		name : "Snailfolk (Mucus Coat)",
+		description : "You can disengage as a bonus action.",
+		action : [
+			["bonus action", "Disengage"]
+		],
+	},
+	'quick withdraw' : {
+		name : "Snailfolk (Quick Withdraw)",
+		description : "When you take damage from a single source, you can use your reaction to withdraw into your shell. When you do, reduce the total damage by your proficiency bonus plus your constitution modifier.",
+		action : [
+			["reaction", "Quick Withdraw"]
+		],
+	},
+	'slime trail' : {
+		name : "Snailfolk (Slime Trail)",
+		description : "Moving through nonmagical difficult terrain costs you no extra movement.",
+	},
+	'wall crawler' : {
+		name : "Snailfolk (Wall Crawler)",
+		description : "You have a climbing speed equal to your walking speed. In addition, you can move across vertical surfaces and upside down along ceilings without using your hands.",
+		speed : {
+			climb : { spd : "walk", enc : 0 },
+		},
+	}
+};
+
 
 
 /*
@@ -1482,6 +1587,153 @@ FeatsList["(ancestry trait) human"] = {
 * SUBCLASSES
 *
 */
+
+AddSubClass("bard", "college of calamity", {
+	regExpSearch : /^(?=.*calamity).*$/i,
+	subname : "College of Calamity",
+	source : ["TPK", 27],
+	features : {
+		"subclassfeature3" : {
+			name : "Hard Knocks",
+			source : [["TPK", 27]],
+			minlevel : 3,
+			description : "\n   " + "When you join the College of Calamity at 3rd level, you gain proficiency in intimidation and learn the cantrip vicious mockery. In addition, you gain the Tavern Brawler feat.",
+			skills : [
+				["Intimidation"],
+			],
+			spellcastingBonus : {
+				name : "Bonus Cantrips (College of Calamity)",
+				times : 1,
+				spells : ["vicious mockery"],
+				selection : ["vicious mockery"]
+			},
+			eval : function() { AddFeat("Tavern Brawler"); },
+			removeeval : function() { RemoveFeat("Tavern Brawler"); }
+		},
+		"subclassfeature3.1" : {
+			name : "Bardic Sinsperation",
+			source : [["TPK", 27]],
+			minlevel : 3,
+			description : desc([
+				"When bardic inspiration dice rolls a of 1, the roller can choose to re-roll the die",
+				"but must use the second result. During re-roll, the creature using the bardic",
+				"inspiration die must do something rude as a free action, such as hurling an insult,",
+				"cutting a rank fart, or another creative crude gesture.",
+			])
+		},
+		"subclassfeature6" : {
+			name : "Dumb Luck",
+			source : [["TPK", 27]],
+			minlevel : 6,
+			description : desc([
+				"When you take damage from a source you can see, you can use your reaction to reduce",
+				"the damage by 1d6 plus your charisma modifier. Usages: 1 plus your charisma modifier",
+				"per long rest. After you activate your last use of this ability, your next attack roll,",
+				"ability check or saving throw is made at disadvantage as luck catches up with you.",
+			])
+			recovery : "long rest",
+			usages : "Charisma modifier per ",
+			usagescalc : "event.value = Math.max(1, What('Cha Mod')) + 1;",
+			action : ["reaction", ""]
+		},
+		"subclassfeature14" : {
+			name : "Feast of Fortune",
+			source : [["TPK", 27]],
+			minlevel : 14,
+			description : "\n   " + "Whenever one of your bardic inspiration die is used and the result is a maximum roll on the die, you regain a bardic inspiration die.",
+		},
+	}
+});
+
+AddSubClass("ranger", "ghostscale reaver", {
+	regExpSearch : /^(?=.*ghostscale).*$/i,
+	subname : "Ghostscale Reaver",
+	source : ["TPK", 29],
+	features : {
+		"subclassfeature3" : {
+			name : "Fallen Sprits",
+			source : [["TPK", 29]],
+			minlevel : 3,
+			description : "\n   " + "When you reduce a target to zero hit points with a spell or weapon attack, you gain a number of temporary hit points equal to your wisdom modifier. In addition, while you have temporary hit points gained from this ability, you are resistant to necrotic damage.",
+			spellcastingExtra : ["divine favor", "spiritual weapon", "vampiric touch", "guardian of faith", "holy weapon"],
+			dmgres : ["Necrotic", "Necro. (when temp HP from Fallen Spirits)"]
+		},
+		"subclassfeature3.1" : {
+			name : "Spirit Strike",
+			source : [["TPK", 29]],
+			minlevel : 3,
+			description : desc([ 
+				"As a bonus action, the next creature you hit with a weapon attack takes necrotic damage.",
+			    "If this die roll results in an 8, you regain 4 hit points.",
+		    ]),
+			additional : levels.map(function (n) { return n < 3 ? "" : "+" + (n < 11 ? 1 : 2) + "d8 necrotic damage"; }),
+			action : ["bonus action", ""]
+		},
+		"subclassfeature7" : {
+			name : "Ghost Shroud",
+			source : [["TPK", 30]],
+			minlevel : 7,
+			description : desc([
+				"You can manifest a ghostly barrier in the heat of battle. Information on 3rd page.",
+			]),
+			"ghost shroud" : {
+				name : "Ghost Shroud",
+				extraname : "Ghostscale Reaver 7",
+				source : [["TPK", 30]],
+				description : desc([
+					"Can be used in the following ways:",
+					" ● When are you targeted by an attack, as a reaction you can increase your armor class by your wisdom",
+					"   modifier until the start of your next turn.",
+					" ● When you make a saving throw against a spell or spell-like ability, as a reaction you can roll another d20 and take the higher of the two rolls.",
+					"You can choose to activate this feature after the attack roll or saving throw is made, but before the GM determines the result. You can use this ability a number of times per day equal to 1 plus your wisdom modifier",
+				])
+			},
+			autoSelectExtrachoices : [{ extrachoice : "ghost shroud" }],
+			recovery : "long rest",
+			usages : "Wisdom modifier per ",
+			usagescalc : "event.value = Math.max(1, What('Wis Mod')) + 1;",
+			action : ["reaction", ""]
+		},
+		"subclassfeature11" : {
+			name : "Death's Chosen",
+			source : [["TPK", 30]],
+			minlevel : 11,
+			description : desc([
+				"When you are reduced to 0 hit points, you manifest an aura of spirits within 10 feet.",
+				"Full Information on third page."
+
+			]),
+			"death's chosen" : {
+				name : "Death's Chosen",
+				extraname : "Ghostscale Reaver 11",
+				source : [["TPK", 30]],
+				description : desc([
+					"When an enemy starts its turn in this area or enters it for the first time on its turn,",
+					"it must succeed on a wisdom saving throw against your spell save DC or take 2d8",
+					"necrotic damage. If this reduces a creature to zero hit points, you regain one hit point. ",
+					"When an ally starts its turn in this area or enters it for the first time on its turn, ",
+					"it regains a number of hit points equal to 1d6 plus your wisdom modifier. ",
+					"This effect lasts until you die or regain consciousness.",
+					"In addition, you have advantage on death saving throws.",
+				])
+			},
+			autoSelectExtrachoices : [{ extrachoice : "death's chosen" }],
+			savetxt : { text : ["Adv. on death saving throws"] }
+		},
+		"subclassfeature15" : {
+			name : "Retributive Spirit",
+			source : [["TPK", 30]],
+			minlevel : 15,
+			description : desc([
+				"When a creature within 30 feet deals damage to you, you can use your reaction to deal",
+				"3d8 necrotic damage to that creature. In addition, it cannot regain hit points until",
+				"the end of your next turn.",
+			]),
+			action : ["reaction", ""],
+		},
+	}
+});
+
 
 AddSubClass("paladin", "oath of the ivory knight", {
 	regExpSearch : /^(?=.*ivory)(?=.*knight).*$/i,
@@ -1638,4 +1890,98 @@ GearList["leyfarer's emblem"] = {
 	source : [["TPK", 15]],
 	amount : 1,
 	weight : ""
+};
+
+
+// FEATS
+
+FeatsList["adaptive mycelia"] = {
+	name : "Adaptive Mycelia",
+	source : [["TPK", 31]],
+	description :
+		"When damaged, use a reaction to make a melee spell attack against the attacker within 30ft."
+		+ " Your attack bonus is equal to your Con mod + Prof Bonus. Spend 1 hit die for damage (necro). +1 hit die at levels 4 and 8."
+		+ " You can use this a number of times equal to your proficiency bonus. [+1 Consitution]",
+	allowDuplicates: false,
+	recovery : "long rest",
+	usages : "Proficiency bonus per ",
+	action : ["reaction", ""],
+	scores : [0, 0, 1, 0, 0, 0],
+};
+
+
+// SPELLS
+
+SpellsList["Final Breath"] = {
+	name : "Final Breath",
+	classes : ["cleric", "sorcerer", "wizard"],
+	source : [["TPK", 32]],
+	level : 3,
+	school : "Necro",
+	time : "1 a",
+	range : "Touch",
+	components : "V,S,M",
+	duration : "Conc, 1 min",
+	compMaterial : "A jaw with the dying creature's final breath",
+	description : "Spell atk 5d6/8/10 at full/missing/half target HP; Kill creates zombie",
+	descriptionFull : desc([
+		"You reach out and touch a creature to push them one step closer to the grave.",
+		"Make a melee spell attack against a creature you can reach. On a hit, the creature takes 5d6 necrotic",
+		"damage. If the creature is below full health, it takes 5d8 necrotic damage instead. If the creature is below",
+		"half health, they take 5d10 necrotic damage instead.",
+		"If this damage reduces the target creature to zero hit points, they immediately transform into a zombie",
+		"under your command. During your turn, if the zombie is within 60 feet, you can use your bonus action to",
+		"command it to take an action and move. If not given a command, the zombie will take the dodge action",
+		"at the end of your turn. This zombie remains for one minute or until you lose concentration, at which",
+		"point it collapses to the ground as a corpse.",
+	]),
+};
+
+SpellsList["Squeeb's Shellward"] = {
+	name : "Squeeb's Shellward",
+	classes : ["sorcerer", "wizard"],
+	source : [["TPK", 32]],
+	level : 2,
+	school : "Abjur",
+	time : "1 rea",
+	range : "Self",
+	components : "V,S,M",
+	duration : "Instantaneous",
+	compMaterial : "A piece of snailfolk shell",
+	description : "Cast when hit by spell w/ saving throw, adv. on save against same SL or lower; 20 negates",
+	descriptionFull : desc([
+		"When the caster is hit or targeted by a spell that requires a saving throw, as a reaction they can manifest",
+		"Squeeb’s Shellward before rolling their save. This gives them advantage on the saving throw against the",
+		"spell, and if they roll a 20 on this save, the spell is negated. This only works on spells of level 2 or lower.",
+		"At Higher Levels: If cast as a 3rd level spell it will work against spells of level 3 or lower. For each",
+		"additional level this spell is cast at, this increased is applied",
+	]),
+};
+
+
+SpellsList["Squeeb’s Tenacious Tendrils"] = {
+	name : "Squeeb’s Tenacious Tendrils",
+	classes : ["sorcerer", "wizard"],
+	source : [["TPK", 33]],
+	level : 3,
+	school : "Conj",
+	time : "1 a",
+	range : "60 ft",
+	components : "V,S,M",
+	duration : "Conc, 1 min",
+	save: "Dex",
+	compMaterial : "A vial of snailfolk slime",
+	description : "10-ft radius, diff. terr.; 2d6+1d6/SL bludg. dmg, grappled. Escape vs. Spell DC. Save half, not grappled",
+	descriptionFull : desc([
+		"A pool of enchanted snail slime with a 10 ft radius covers a portion of ground the caster can see. Any",
+		"creature in the area must succeed on a dexterity saving throw or take 2d6 bludgeoning damage as gooey",
+		"tendrils rise up and pummel them. Any creature that fails their save is also grappled. The DC to escape",
+		"this grapple is equal to the caster’s spell DC. If a creature starts its turn grappled by this spell, they take",
+		"2d6 bludgeoning damage. If a creature enters this area or starts their turn there, if they aren’t grappled",
+		"by the spell they must succeed on a dexterity saving throw or take 2d6 bludgeoning damage and become",
+		"grappled. On a successful save they take half damage and are not grappled. The area is considered",
+		"difficult terrain.",
+		"At Higher Levels: When you cast this spell using a spell slot of 4th level or higher, the damage increases",
+		"by 1d6 for each slot level above 3rd.",
+	]),
 };
