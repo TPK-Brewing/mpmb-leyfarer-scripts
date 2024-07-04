@@ -742,12 +742,90 @@ ClassList["tlc_ancestries"] = {
 				},
 			}
 		},
+		"frogfolk_ancestries" : {
+			name : "(Ancestry Trait) Frogfolk",
+			source : [["TPK", 14]],
+			description : "",
+			extraname : "Frogfolk Ancestry",
+			extrachoices : [ 'Amphibious', 'Dynamic Leap', 'Powerful Tongue' ],
+			'amphibious' : {
+				name : "Amphibious",
+				description : " You can breathe air and water, and you have a swim speed equal to your walking speed.",
+				speed : {
+					swim : { spd : "walk", enc : 0 },
+				},
+			},
+			'dynamic leap' : {
+				name : "Dynamic Leap",
+				description : " Your long jump distance is equal to your walking speed and your high jump distance is equal to half your walking speed, rounded down. This is true whether you have a running start or not.",
+			},
+			'powerful tongue' : {
+				name : "Powerful Tongue",
+				description : " Your tongue has a range of 10 feet, and when you hit with it, you deal 1d4 + your Str Mod bludgeoning damage. You can also use your tongue to interact with a tiny object within 10 feet, such as pressing a button, picking up a bottle, or snatching a falling document out of the air.",
+				weaponsAdd : ["Powerful Tongue"],
+				weaponOptions : {
+					regExpSearch : /^(?=.*powerful)(?=.*tongue).*$/i,
+					name : "Powerful Tongue",
+					baseWeapon : "unarmed strike",
+					damage : [1, 4, "bludgeoning"],
+					ability : 1,
+					range : "10 ft",
+					description : "Can interact with tiny objects",
+					abilitytodamage : true,
+				},
+			},
+		},
+		"frogfolk_ranga_ancestries" : {
+			name : "(Origin Trait) Ranga",
+			source : [["TPK", 15]],
+			description : "",
+			extraname : "Origin Trait",
+			extrachoices : [ 'Poison Immunity', 'Secrete Toxin' ],
+			'poison immunity' : {
+				name : "Poison Immunity",
+				description : " You are immune to poison damage and the poisoned condition.",
+				savetxt : {
+					immune : ["poison"],
+				},
+			},
+			'secrete toxin' : {
+				name : "Secrete Toxin",
+				description : " Any creature that comes into direct contact with your skin must succeed on a Constitution saving throw (DC = 8 + Con Mod + Prof) or become poisoned until the end of its next turn. In addition, as a bonus action you can apply this poison to a piercing weapon, and it remains potent for one hour.",
+				action : [
+					["bonus action", "Secret Toxin"]
+				],
+			},
+	
+		},
+		"frogfolk_wark_ancestries" : {
+			name : "(Origin Trait) Wark",
+			source : [["TPK", 15]],
+			description : "",
+			extraname : "Origin Trait",
+			extrachoices : [ 'Deafening Croak', 'Wark Training' ],
+			'deafening croak' : {
+				name : "Deafening Croak",
+				description : " One attack can be replaced a thunderous bellow that affects creatures in a 15-foot cone. Each creature in that area must make a Constitution saving throw (DC = 8 + Con Mod + Prof). On a failed save, the creature takes 1d6 thunder damage and is deafened for one minute. On a successful save, it takes half as much damage and is not deafened. This damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6). You can use this ability a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+				usages : "Proficiency bonus per ",
+				recovery : "long rest",
+			},
+			'wark training' : {
+				name : "Wark Training",
+				description : " You have proficiency with spears, whips, blowguns, nets, and light armor.",
+				armorProfs : [
+					[true, false, false, false],
+				],
+				weapons : [ 
+					[false, false, ["spears", "whips", "blowguns", "nets"]], 
+				],
+			},
+		},
 		"mixed_lineages" : {
 			name : "Mixed Lineage",
 			source : [["TPK", 20]],
 			description : "",
 			extraname : "Mixed Lineage",
-			extrachoices : ["Elf", "Gnome", "Human", "Orc", "Birdfolk", "Catfolk", "Lizardfolk", "Ratfolk", "Snailfolk"],
+			extrachoices : ["Elf", "Gnome", "Human", "Orc", "Birdfolk", "Catfolk", "Lizardfolk", "Ratfolk", "Snailfolk", "Frogfolk"],
 			'elf' : {
 				name : "Mixed Lineage - Elf",
 				bonusClassExtrachoices : [{
@@ -817,6 +895,14 @@ ClassList["tlc_ancestries"] = {
 				bonusClassExtrachoices : [{
 					"class" : "tlc_ancestries",
 					"feature" : "snailfolk_ancestries",
+					"bonus" : 1
+				}],
+			},
+			'frogfolk' : {
+				name : "Mixed Lineage - Frogfolk",
+				bonusClassExtrachoices : [{
+					"class" : "tlc_ancestries",
+					"feature" : "frogfolk_ancestries",
 					"bonus" : 1
 				}],
 			},
@@ -917,7 +1003,7 @@ ClassList["tlc_ancestries"] = {
 								fields.Description += (fields.Description ? '; ' : '') + 'Can deal Fire damage instead';
 							};
 						},
-						"I can use fire damage instead of piercing, bludeoning, or slashing."
+						"I can use fire damage instead of piercing, bludgeoning, or slashing."
 					]
 				}
 			},
@@ -1058,7 +1144,7 @@ AddRacialVariant("elf (tpk)","briar", {
 	
 	bonusClassExtrachoices : [{
 		"class" : "tlc_ancestries",
-		"feature" : "elf_ancestries",
+		"feature" : ["elf_ancestries", "elf_briar_ancestries"],
 		"bonus" : 2
 	},
 	{
@@ -1977,6 +2063,148 @@ AddRacialVariant("Snailfolk", "exotic lineage", {
 	}],
 });
 
+RaceList["frogfolk (tpk)"] = {
+	regExpSearch : /^(?=.*frogfolk)(?=.*\(tpk\)).*$/i,
+	name : "Frogfolk (TPK)",
+    sortname : "(TPK) Frogfolk",
+	source : [["TPK", 13]],
+	plural : "Frogfolk",
+	size : 4,
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	languageProfs : ["Common", "Gorok"],
+	scorestxt : "+2/+1 to two ability scores or +1/+1/+1 to three ability scores of my choice",
+	savetxt : {
+		text : ["Affected by Beast spells/abilites"]
+	},
+	trait : "Frogfolk (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Wilderfolk. Spells and abilities that affect Beasts also affect you.",
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Frogfolk",
+		"   - (Lineage Trait) Lineage",
+	]),
+	
+	removeeval : function () { cleanup_ancestries(); },
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_ancestries",
+		"bonus" : 3
+	}],
+};
+
+AddRacialVariant("frogfolk (tpk)", "ranga", {
+	regExpSearch : /^(?=.*ranga).*$/i,
+	name : "Ranga Frogfolk",
+    sortname : "Frogfolk, Ranga",
+	source : [["TPK", 13]],
+	plural : "Ranga",
+	trait : "Ranga Frogfolk (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Wilderfolk. Spells and abilities that affect beasts also affect you.",
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Frogfolk",
+		"   - (Origin Trait) Ranga Frogfolk",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_ranga_ancestries",
+		"bonus" : 1
+	}],
+});
+
+AddRacialVariant("frogfolk (tpk)", "wark", {
+	regExpSearch : /^(?=.*wark).*$/i,
+	name : "Wark Frogfolk",
+    sortname : "Frogfolk, Wark",
+	source : [["TPK", 13]],
+	plural : "Wark",
+	trait : "Wark Frogfolk (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Wilderfolk. Spells and abilities that affect beasts also affect you.",
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Frogfolk",
+		"   - (Origin Trait) Wark Frogfolk",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_wark_ancestries",
+		"bonus" : 1
+	}],
+});
+
+
+AddRacialVariant("frogfolk (tpk)", "mixed lineage", {
+	regExpSearch : /mixed/i,
+	name : "Mixed Frogfolk Lineage",
+	source : [["TPK", 8]],
+	plural : "Mixed Lineage",
+	savetxt : {
+		text : ["Affected by Beast spells/abilites"]
+	},
+	trait : "Mixed Frogfolk Lineage (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Wilderfolk. Spells and abilities that affect Beasts also affect you.",
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Frogfolk",
+		"   - (Lineage Trait) Lineage",
+		"   - Any trait from one other ancestry",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "mixed_lineages" ,
+		"bonus" : 1
+	}],
+});
+
+AddRacialVariant("frogfolk (tpk)", "exotic lineage", {
+	regExpSearch : /exotic/i,
+	name : "Exotic Frogfolk Lineage",
+	source : [["TPK", 8]],
+	plural : "Exotic Lineage",
+	savetxt : {
+		text : ["Affected by Beast spells/abilites"]
+	},
+	trait : "Mixed frogfolk Lineage (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Wilderfolk. Spells and abilities that affect Beasts also affect you.",
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Frogfolk",
+		"   - (Lineage Trait) Lineage",
+		"   - Any trait from an exotic lineage",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "frogfolk_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "exotic_lineages" ,
+		"bonus" : 1
+	}],
+});
+
 
 /*
 *
@@ -2290,17 +2518,6 @@ GearList["leyfarer's emblem"] = {
 	weight : ""
 };
 
-factions["leyfarers"] = {
-	name : "Leyfarers",
-	type : "TLC",
-	ranks : [
-		"Initiate (Rank 1)",
-		"Adept (Rank 2)",
-		"Mentor (Rank 3)",
-		"Advisor (Rank 4)",
-		"Director (Rank 5)"
-	]
-};
 
 // FEATS
 
