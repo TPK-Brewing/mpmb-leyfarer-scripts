@@ -2213,6 +2213,115 @@ AddRacialVariant("frogfolk (tpk)", "exotic lineage", {
 *
 */
 
+AddSubClass("artificer", "Sunforge", {
+	regExpSearch : /^(?=.*sunforge).*$/i,
+	subname : "Sunforge",
+	source : ["TPK", 28],
+	features : {
+		"subclassfeature3" : {
+			name : "Tool Proficiency",
+			source : [["TPK", 29]],
+			minlevel : 3,
+			description : "\n   " + "You gain proficiency with jeweler’s tools. If you already have this proficiency, " +
+			"\n   " + "you gain proficiency with one other type of artisan's tools of your choice.",
+			toolProfs : ["Jeweler's Tools", 1],
+			spellcastingExtra : ["guiding bolt", "helling rebuke" , "continual flmae", "flame blade", "blinding smite", "daylight", "fire shield", "sickening radiance", "destructive wave", "wall of light"]
+		},
+		"subclassfeature3.1" : {
+			name : "Synthesize Sunshard",
+			source : [["TPK", 32]],
+			minlevel : 3,
+			description : desc([
+				"After long rest, create sunshard with a number of charges equal to your highest-level",
+				"spell slot. Action to expend a spell slot to create additional. Charges equal to spell slot",
+				"Sunshards can cast light and are destroyed when depleted or at next long rest.",
+			]),
+			action : ["action", ""]
+		},
+		"subclassfeature3.2" : {
+			name : "Sunshard Infusion",
+			source : [["TPK", 32]],
+			minlevel : 3,
+			description : desc([
+				"As an action, attach sunshard to an item to imbue it with an infusion (see Notes Page)",
+				"Removing destroys sunshard. Max one per item, total equal to Prof Bonus.",
+			]),
+			action : ["action", ""],
+			toNotesPage : [{
+				name : "Sunshard Infusions Table",
+				note: "Sunshard Infusions",
+				note : [
+					"Any Item:",
+					"  - Overcharge. Increase the magic item’s number of charges by the number of",
+					"    charges on the sunshard. When you expend charges from the item, use the",
+					"    sunshard’s charges first.",
+					"Armor or Shield: ",
+					"  - Solar Shield. When you take damage from an attack, as a reaction you can",
+					"    expend one charge from the sunshard to halve the attack’s damage, or",
+					"    reduce it to zero if it is radiant damage.",
+					"Spellcasting Focus:",
+					"  - Arcane Brilliance. When you cast a spell that deals damage, you can ",
+					"    expend one charge from the sunshard to cast it as though it were",
+					"    one spell level higher.",
+					"Weapon:",
+					"  - Cutting Edge. When you hit with an attack using the infused weapon,",
+					"    you can expend one charge from the sunshard to deal an additional",
+					"    weapon die of radiant damage.",
+				],
+			}],
+			
+		},
+		"subclassfeature5" : {
+			name : "Efficient Caster",
+			source : [["TPK", 30]],
+			minlevel : 5,
+			description : desc([
+				"When you cast a spell of 2nd level or higher, roll 1d10 and add your Intelligence modifier.",
+				"On a 10 or higher, you simultaneously synthesize a sunshard with one charge.",
+			]),
+		},
+		"subclassfeature9" : {
+			name : "Improved Infusion",
+			source : [["TPK", 30]],
+			minlevel : 9,
+			description : desc([
+				"When sunshard infusion has 2+ charges remaining, gains additional effects (see Notes)",
+				"Number of items you can infuse is now Prof Bonus + Int Mod.",
+			]),
+			toNotesPage : [{
+				name : "Improved Infusions Table",
+				note: "Improved Infusions",
+				note : [
+					"Overcharge:",
+					"  - Overdrive. If the infused item has less than its maximum number of charges",
+					"    at the time it is infused, it regains one charge.",
+					"Solar Shield : ",
+					"  - Solar Aegis. The infused armor has an additional +1 to AC and makes the",
+					"    wearer resistant to radiant damage.",
+					"Arcane Brilliance:",
+					"  - Arcane Radiance. Spells cast using the infused spellcasting focus have a",
+					"    +1 bonus to spell attack and spell save DC.",
+					"Cutting Edge:",
+					"  - Razor’s Edge. The infused weapon has an additional +1 to attacks rolls",
+					"    and damage and can deal radiant damage instead of its normal damage type.",
+				],
+				amendTo : "Sunshard Infusions Table",
+			}],
+
+		},
+		"subclassfeature14" : {
+			name : "Sunforge Mastery",
+			source : [["TPK", 27]],
+			minlevel : 14,
+			description : "\n   " + "You gain the following abilities:" +
+			"\n   " + "• Action to destroy a sunshard that you synthesized, regain a spell slot equal to the number of charges." +
+			"\n   " + "• When you cast a spell while touching a synthesized sunshard, you can siphon power from it and convert it into arcane energy, expending any number of charges from it to increase the spell level by the same number. You can only do this with one sunshard at a time." +
+			"\n   " + "• When you cast a spell that deals radiant damage, after rolling damage you can change the result on any number of dice to your Intelligence modifier or the highest number on the die, whichever is lower.",
+			action : ["action", ""] 
+		},
+	}
+});
+
 AddSubClass("bard", "college of calamity", {
 	regExpSearch : /^(?=.*calamity).*$/i,
 	subname : "College of Calamity",
@@ -2266,6 +2375,76 @@ AddSubClass("bard", "college of calamity", {
 			source : [["TPK", 27]],
 			minlevel : 14,
 			description : "\n   " + "Whenever one of your bardic inspiration die is used and the result is a maximum roll on the die, you regain a bardic inspiration die.",
+		},
+	}
+});
+
+AddSubClass("fighter", "frog knight", {
+	regExpSearch : /^(?=.*frog)(?=.*knight).*$/i,
+	subname : "Frog Knight",
+	source : ["TPK", 32],
+	features : {
+		"subclassfeature3" : {
+			name : "Bonus Proficiency",
+			source : [["TPK", 32]],
+			minlevel : 3,
+			description : "\n   " + "Gain one of the following skills: History, Insight, Performance, or Religion. If you are already" +
+			"\n   " + "trained in one of these skills, you can instead choose to gain expertise in it.",
+			skillstxt : "Choose one from History, Insight, Performance, or Religion. Gain Expertise if already proficient in chosen skill.",
+		},
+		"subclassfeature3.1" : {
+			name : "Leaping Strike",
+			source : [["TPK", 32]],
+			minlevel : 3,
+			description : desc([
+				"As a bonus action, you can leap 10 feet in any direction. Opportunity attacks provoked",
+				"by this movement are made with disadvantage. In addition, if you use this ability ",
+				"and then make a melee weapon attack with a weapon you are wielding with two hands,",
+				"you can roll a Strength (Athletics) check to add additional effects from the table below.",
+				"0–10        +1d6 damage",
+				"11–15       +1d6 damage, one size larger and under Str Save or be knocked prone",
+				"15+         +1d8 damage, one size larger and under Str Save or be knocked prone",
+				"At level 7, the damage dealt increases to 2d6/2d8, and at level 15 to 3d6/3d8."
+			]),
+			action : ["bonus action", ""]
+		},
+		"subclassfeature7" : {
+			name : "Froggly Honor",
+			source : [["TPK", 32]],
+			minlevel : 7,
+			description : desc([
+				"You have advantage on saving throws against fear and charm. In addition, medium and heavy", 
+				"armor you wear does not impose disadvantage on Dexterity (Stealth) checks that you make."
+			]),
+			savetxt : { text : ["Adv. vs fear, charm"] },
+
+		},
+		"subclassfeature10" : {
+			name : "Defensive Leap",
+			source : [["TPK", 32]],
+			minlevel : 10,
+			description : "\n   " + "When you use a leaping strike on your turn, your armor class increases by 3 until the "+ 
+			"\n   " + "start of your next turn.",
+		},
+		"subclassfeature15" : {
+			name : "Defensive Leap",
+			source : [["TPK", 32]],
+			minlevel : 15,
+			description : "\n   " + "when an ally within 15 feet is hit by a melee attack, you can use your reaction to leap in the way and change the target of the attack to you. If the attack roll is less than your AC, the attack misses instead. If it hits, you take half damage from the attack and the original target takes none. In addition, you move to a space that is adjacent to both your ally and the attacker. This ability only works if you can see the attacker and your ally, there is room to move next to them, and there is no obstacle impeding the movement. You can use this ability 2 times per short or long rest." 
+			+ "\n   " + "The range of your leaping strike increases to 15 feet.",
+			usages : 2,
+			recovery : "short rest"
+		},
+		"subclassfeature15" : {
+			name : "Relentless Tongue",
+			source : [["TPK", 33]],
+			minlevel : 15,
+			description : "\n   " + "As a bonus action on each of your turns, you may use your tongue to target a creature within 15 feet with one of the following abilities." +
+			"\n   " + "• Make an unarmed strike that deals 1d8 + Strength modifier damage." +
+			"\n   " + "• Push a creature 10 feet away from you if they fail a Strength saving throw." +
+			"\n   " + "• Pull a creature 10 feet toward you if they fail a Strength saving throw." +
+			"\n   " + "• Disarm a creature that is one size larger than you or smaller if they fail a Strength saving throw.",
+			action : ["bonus action", ""]
 		},
 	}
 });
