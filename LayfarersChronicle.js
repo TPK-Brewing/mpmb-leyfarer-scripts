@@ -30,7 +30,7 @@ ClassList["tlc_ancestries"] = {
 	defaultExcluded : true,
 	prereqeval : global_TCoE_Sidekick_fn.prereqeval,
 	regExpSearch : /^(?=.*TLC)(?=.*Ancestries).*$/i,
-	name : "TLC",
+	name : "Leyfarer",
 	source : [["T", 146]],
 	primaryAbility : "Strength, Dexterity, or Constitution",
 	prereqs : "Can't multiclass",
@@ -1090,8 +1090,72 @@ ClassList["tlc_ancestries"] = {
 				savetxt : { text : ["Adv. against grapple from plants"] }
 			}
 		},
-	}
+
+		/* Background Features */
+		"explorer_ranks" : {
+			name : "Explorer Ranks",
+			source : [["TPK", 26]],
+			description : "",
+			extraname : "Explorer Ranks",
+			extrachoices : [ 'Adept', 'Mentor'],
+			'adept' : {
+				name : "Adept",
+				skills : ["Survival"],
+			},
+			'mentor' : {
+				name : "Mentor",
+				spellcastingBonus : [{
+					spells : ["comprehend languages"],
+					name : "Explorer (Mentor)",
+					selection : ["comprehend languages"],
+					spellcastingAbility : 4,
+				}],
+			},
+
+		},
+		"naturalist_ranks" : {
+			name : "Naturalist Ranks",
+			source : [["TPK", 26]],
+			description : "",
+			extraname : "Naturalist Ranks",
+			extrachoices : [ 'Adept', 'Mentor'],
+			'adept' : {
+				name : "Adept",
+				skills : ["Nature"],
+			},
+			'mentor' : {
+				name : "Mentor",
+				spellcastingBonus : [{
+					spells : ["detect poison and disease"],
+					name : "Naturalist (Mentor)",
+					selection : ["detect poison and disease"],
+					spellcastingAbility : 4,
+				}],
+			},
+		},
+		"scholar_ranks" : {
+			name : "Scholar Ranks",
+			source : [["TPK", 26]],
+			description : "",
+			extraname : "Scholar Ranks",
+			extrachoices : [ 'Adept', 'Mentor'],
+			'adept' : {
+				name : "Adept",
+				skills : ["History"],
+			},
+			'mentor' : {
+				name : "Mentor",
+				spellcastingBonus : [{
+					spells : ["identify"],
+					name : "Scholar (Mentor)",
+					selection : ["identify"],
+					spellcastingAbility : 4,
+				}],
+			},
+		},
+	},
 }
+
 
 /*  ELVES  */
 
@@ -1144,7 +1208,7 @@ AddRacialVariant("elf (tpk)","briar", {
 	
 	bonusClassExtrachoices : [{
 		"class" : "tlc_ancestries",
-		"feature" : ["elf_ancestries", "elf_briar_ancestries"],
+		"feature" : "elf_ancestries",
 		"bonus" : 2
 	},
 	{
@@ -2657,8 +2721,8 @@ AddSubClass("warlock", "the lady of ivory", {
 */
 
 BackgroundList["leyfarer"] = {
-	regExpSearch : /leyfarer/i,
-	name : "Leyfarer",
+	regExpSearch : /^(?=.*leyfarer)(?=.*initiate).*$/i,
+	name : "Leyfarer Initiate",
 	source : ["TPK", 21],
 	gold : 15,
 	equipleft : [
@@ -2676,6 +2740,39 @@ BackgroundList["leyfarer"] = {
 	eval : function () { AddString('Feat Note 1', 'Background bonus feat') },
 	removeeval : function() { RemoveString('Feat Note 1', 'Background bonus feat'); },
 };
+
+AddBackgroundVariant("leyfarer", "explorer", {
+	regExpSearch : /^(?=.*explorer)(?=.*leyfarer).*$/i,
+	name : "Leyfarer Explorer Focus",
+	source : ["TPK", 26],
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "explorer_ranks",
+		"bonus" : 4
+	}],
+});
+
+AddBackgroundVariant("leyfarer", "naturalist", {
+	regExpSearch : /^(?=.*naturalist)(?=.*leyfarer).*$/i,
+	name : "Leyfarer Naturalist Focus",
+	source : ["TPK", 26],
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "naturalist_ranks",
+		"bonus" : 4
+	}],
+});
+
+AddBackgroundVariant("leyfarer", "scholar", {
+	regExpSearch : /^(?=.*scholar)(?=.*leyfarer).*$/i,
+	name : "Leyfarer Scholar Focus",
+	source : ["TPK", 26],
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "scholar_ranks",
+		"bonus" : 4
+	}],
+});
 
 BackgroundFeatureList["leyfarer's journey"] = {
 	description : "Choose two skills and a total of two tool proficiencies or languages. \nChoose a feat. \nCreate two personality traits, one ideal, one bond, and one flaw.",
