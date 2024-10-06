@@ -820,6 +820,211 @@ ClassList["tlc_ancestries"] = {
 				],
 			},
 		},
+		"kobold_ancestries" : {
+			name : "(Ancestry Trait) Kobold",
+			source : [["TPK", 14]],
+			description : "",
+			extraname : "Kobold Ancestry",
+			extrachoices : [ 'Blindsight', 'Improvised Ingenuity', 'Tunnel Fighter', 'Underfoot' ],
+			'blindsight' : {
+				name : "Blindsight",
+				description : " You have blindsight with a range of 30 feet.",
+				vision : [
+					["Blindsight", 30],
+				],
+			},
+			'improvised ingenuity' : {
+				name : "Improvised Ingenuity",
+				description : " You don't need a tool kit to craft or make skill checks for tools you are proficient with as long as you have at least 10 minutes to spend cobbling together supplies.",
+			},
+			'tunnel fighter' : {
+				name : "Tunnel Fighter",
+				description : " When you make a ranged weapon attack using a thrown weapon, you don’t incur disadvantage by being within 5 feet of one or more enemies.",
+			},
+			'underfoot' : {
+				name : "Underfoot",
+				description : " You can disengage as a bonus action, and, on turns where you disengage, you can pass through enemy squares if they are at least one size larger than you.",
+				action : [
+					["bonus action", "Underfoot (Disengage)"]
+				],
+			},
+		},
+		"kobold_vangrant_ancestries" : {
+			name : "(Origin Trait) Vangrant",
+			source : [["TPK", 15]],
+			description : "",
+			extraname : "Origin Trait",
+			extrachoices : [ 'Ambusher', 'Piercing Cry' ],
+			'ambusher' : {
+				name : "Ambusher",
+				description : " When you and an ally are on opposite sides of a creature that is within 5 feet of both of you, you have advantage on attacks against that creature.",
+			},
+			'piercing cry' : {
+				name : "Piercing Cry",
+				description : " As a reaction, before rolling dex save, you and your allies within 10 feet add 1d4 to save. You can use this ability a number of times equal to your proficiency bonus, regain on short rest.",
+				usages : "Proficiency bonus per ",
+				action : [
+					["reaction", "Piercing Cry"]
+				],
+			},
+	
+		},
+		"kobold_sovereign_ancestries" : {
+			name : "(Origin Trait) Sovereign",
+			source : [["TPK", 15]],
+			description : "",
+			extraname : "Origin Trait",
+			extrachoices : [ 'Draconic Aegis', 'Dragons Breath', 'Sovereigns Gift' ],
+			'draconic aegis' : {
+				name : "Draconic Aegis",
+				description : " You are resistant to the type of damage associated with your draconic patron. In addition, you may use Constitution instead of Dexterity to determine your AC bonus, following any limitations for the type of armor.",
+				eval : function() {
+					var AEoptions = ["Cold", "Fire", "Force", "Lightning", "Psychic", "Radiant", "Thunder"];
+					var theChoice = AskUserOptions('Draconic Aegis', 'The Draconic Aegis Ancestry offers a choice of a damage resistance. You can change this selection by unselecting the ancestry and re-selecting it.', AEoptions, 'radio', true);
+					switch (theChoice) {
+						case "Cold":
+							SetProf("dmgres", true, "Cold", "Draconic Aegis");
+							break;
+						case "Fire":
+							SetProf("dmgres", true, "Fire", "Draconic Aegis")
+							break;
+						case "Force":
+							SetProf("dmgres", true, "Force", "Draconic Aegis")
+							break;
+						case "Lightning":
+							SetProf("dmgres", true, "Lightning", "Draconic Aegis")
+							break;
+						case "Psychic":
+							SetProf("dmgres", true, "Psychic", "Draconic Aegis")
+							break;
+						case "Radiant":
+								SetProf("dmgres", true, "Radiant", "Draconic Aegis")
+								break;
+						case "Thunder":
+							SetProf("dmgres", true, "Thunder", "Draconic Aegis")
+							break;
+					};
+				},
+			},
+			'dragons breath' : {
+				name : "Dragons Breath",
+				description : " Replace one of your attacks with a breath weapon. Creatures save in a 30-foot line save against your Consititution (8 + Con Mod + Prof). Targets take 1d10 damage, save halves. Increases by 1d10 at levels 5, 11, and 17.",
+				usages : "Proficiency bonus per ",
+				recovery : "long rest",
+				weaponOptions : [{
+					regExpSearch : /^(?=.*dragons)(?=.*breath).*$/i,
+					name : "Dragons Breath weapon",
+					source : [["TPK", 12]],
+					ability : 3,
+					type : "Natural",
+					damage : [1, 10, "fire"],
+					range : "30-ft line",
+					description : "Hits all in area; Dex save, success - half damage",
+					abilitytodamage : false,
+					dc : true,
+					kbBreathWeapon : true,
+					selectNow : true
+				}],
+				calcChanges : {
+					atkAdd : [
+						function (fields, v) {
+							if (v.theWea.kbBreathWeapon) {
+								fields.Damage_Die = (CurrentRace.level < 6 ? 2 : CurrentRace.level < 11 ? 3 : CurrentRace.level < 16 ? 4 : 5) + 'd10';
+								var AEoptions = ["Cold", "Fire", "Force", "Lightning", "Psychic", "Radiant", "Thunder"];
+								var theChoice = AskUserOptions('Dragons Breath', 'The Dragons Breath Ancestry offers a choice of a breath weapon damage. You can change this selection by unselecting the ancestry and re-selecting it.', AEoptions, 'radio', true);
+								switch (theChoice) {
+									case "Cold":
+										fields.Damage_Type = 'cold';
+										break;
+									case "Fire":
+										fields.Damage_Type = 'fire';
+										break;
+									case "Force":
+										fields.Damage_Type = 'force';
+										break;
+									case "Lightning":
+										fields.Damage_Type = 'lightning';
+										break;
+									case "Psychic":
+										fields.Damage_Type = 'psychic';
+										fields.Description = fields.Description.replace(/Dex save/i, 'Wis save');
+										break;
+									case "Radiant":
+										fields.Damage_Type = 'radiant';
+										break;
+									case "Thunder":
+										fields.Damage_Type = 'thunder';
+										break;
+								};
+							};
+						},
+						"",
+						1
+					]
+				},
+			},
+			'sovereigns gift' : {
+				name : "Sovereigns Gift",
+				description : " You gain a draconic lineage trait determined by your draconic patron.",
+				bonusClassExtrachoices : [{
+					"class" : "tlc_ancestries",
+					"feature" : "sovereigns_gift_ancestries",
+					"bonus" : 1
+				}],
+			},
+		},
+		"sovereign_gift_ancestries" : {
+			name : "(Origin Trait) Sovereign Gift",
+			source : [["TPK", 15]],
+			description : "",
+			extraname : "Origin Trait",
+			extrachoices : [ 'Sovereigns Gift of the cindergale', 'Sovereigns Gift of the Levintide', 'Sovereigns Gift of the Mindsire', 'Sovereigns Gift of the Mooneater', 'Sovereigns Gift of the Mourningstar', 'Sovereigns Gift of the Neverbeast', 'Sovereigns Gift of the Windrose' ],
+			'sovereigns gift of the cindergale' : {
+				name : "Sovereigns Gift of the Cindergale",
+				source : [["TPK", 19]],
+				description : " When your spells or abilities deal fire damage to a creature or object that has fire resistance, the amount of damage is not reduced. When your spells or abilities deal fire damage to a creature or object that is immune to fire, it is dealt damage as though it was resistant to fire instead."
+			},
+			'sovereigns gift of the levintide' : {
+				name : "Sovereigns Gift of the Levintide",
+				source : [["TPK", 19]],
+				description : " When you deal lightning or thunder damage, you can use this trait to reroll a number of damage dice up to your Constitution modifier. You must use the new result. You can use this ability a number of times per long rest equal to your proficiency bonus.",
+				usages : "Proficiency bonus per ",
+				recovery : "long rest",
+			},
+			'sovereigns gift of the mindsire' : {
+				name : "Sovereigns Gift of the Mindsire",
+				source : [["TPK", 19]],
+				description : " You gain a number of charges equal to your proficiency bonus minus 1. As an action, spend any number of charges to gain a spell slot. The level of this spell slot is equal to the number of charges spent. When you take a long rest, you regain your spent charges and lose any spell slots created using this trait.",
+				action : [ "action", "Gift of the Mindsire"],
+				usages : "Proficiency bonus per ", 
+				usagescalc : "event.value = Math.max(1, What('Proficiency Bonus') - 1);",
+				recovery : "long rest"
+			},
+			'sovereigns gift of the mooneater' : {
+				name : "Sovereigns Gift of the Mooneater",
+				source : [["TPK", 20]],
+				description : " You have the ability to communicate telepathically with creatures that can breathe underwater. In addition, when you roll a 1 on a damage die for a spell or ability that deals cold damage, you can reroll the die. You must use the new roll."
+			},
+			'sovereigns gift of the mourningstar' : {
+				name : "Sovereigns Gift of the Mourningstar",
+				source : [["TPK", 20]],
+				description : " You can maintain concentration on two spells at the same time, provided that at least one is a divination spell. If you lose concentration for any reason, including failing a concentration check or becoming incapacitated, you lose concentration on both spells."
+			},
+			'sovereigns gift of the neverbeast' : {
+				name : "Sovereigns Gift of the Neverbeast",
+				source : [["TPK", 20]],
+				description : " Spells and abilities that affect monstrosities also affect you. In addition, your spells and abilities that reference beasts also include monstrosities with an Intelligence score of 4 or less and monstrosities that don’t comprehend any languages.",
+				savetxt : {
+					text : ["Affected by Monstrosites spells/abilites"]
+				},
+			},
+			'sovereigns gift of the windrose' : {
+				name : "Sovereigns Gift of the Windrose",
+				source : [["TPK", 20]],
+				description : " While singing, you have advantage on checks made to navigate through wilderness and to detect the presence of secret doors."
+			},
+
+		},
 		"mixed_lineages" : {
 			name : "Mixed Lineage",
 			source : [["TPK", 20]],
@@ -903,6 +1108,14 @@ ClassList["tlc_ancestries"] = {
 				bonusClassExtrachoices : [{
 					"class" : "tlc_ancestries",
 					"feature" : "frogfolk_ancestries",
+					"bonus" : 1
+				}],
+			},
+			'kobold' : {
+				name : "Mixed Lineage - Kobold",
+				bonusClassExtrachoices : [{
+					"class" : "tlc_ancestries",
+					"feature" : "kobold_ancestries",
 					"bonus" : 1
 				}],
 			},
@@ -2263,6 +2476,135 @@ AddRacialVariant("frogfolk (tpk)", "exotic lineage", {
 	bonusClassExtrachoices : [{
 		"class" : "tlc_ancestries",
 		"feature" : "frogfolk_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "exotic_lineages" ,
+		"bonus" : 1
+	}],
+});
+
+
+RaceList["kobold (tpk)"] = {
+	regExpSearch : /^(?=.*kobold)(?=.*\(tpk\)).*$/i,
+	name : "kobold (TPK)",
+    sortname : "(TPK) Kobold",
+	source : [["TPK", 11]],
+	plural : "Kobold",
+	size : [3, 4],
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	languageProfs : ["Common", "Gobalo"],
+	scorestxt : "+2/+1 to two ability scores or +1/+1/+1 to three ability scores of my choice",
+	trait : "Kobold (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Kobold",
+		"   - (Lineage Trait) Lineage",
+	]),
+	
+	removeeval : function () { cleanup_ancestries(); },
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_ancestries",
+		"bonus" : 3
+	}],
+};
+
+AddRacialVariant("kobold (tpk)", "vagrant", {
+	regExpSearch : /^(?=.*vagrant).*$/i,
+	name : "Vagrant Kobold",
+    sortname : "Kobold, Vagrant",
+	source : [["TPK", 11]],
+	plural : "Vagrant Kobold",
+	trait : "Vagrant Kobold (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Kobold",
+		"   - (Origin Trait) Vagrant Kobold",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_vagrant_ancestries",
+		"bonus" : 1
+	}],
+});
+
+AddRacialVariant("kobold (tpk)", "sovereign", {
+	regExpSearch : /^(?=.*sovereign).*$/i,
+	name : "Sovereign Kobold",
+    sortname : "Kobold, Sovereign",
+	source : [["TPK", 11]],
+	plural : "Sovereign Kobold",
+	trait : "Sovereign Kobold (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Kobold",
+		"   - (Origin Trait) Sovereign Kobold",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_sovereign_ancestries",
+		"bonus" : 1
+	}],
+});
+
+
+AddRacialVariant("kobold (tpk)", "mixed lineage", {
+	regExpSearch : /mixed/i,
+	name : "Mixed Kobold Lineage",
+	source : [["TPK", 11]],
+	plural : "Mixed Lineage",
+	trait : "Mixed Kobold Lineage (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Kobold",
+		"   - (Lineage Trait) Lineage",
+		"   - Any trait from one other ancestry",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_ancestries",
+		"bonus" : 2
+	},
+	{
+		"class" : "tlc_ancestries",
+		"feature" : "mixed_lineages" ,
+		"bonus" : 1
+	}],
+});
+
+AddRacialVariant("kobold (tpk)", "exotic lineage", {
+	regExpSearch : /exotic/i,
+	name : "Exotic Kobold Lineage",
+	source : [["TPK", 8]],
+	plural : "Exotic Lineage",
+	trait : "Mixed Kobold Lineage (+2/+1 OR +1/+1/+1 to any ability scores)" + desc([
+		"Traits. I can choose three traits. Select in the \"Choose Feature\"\n   section in the top left of this page.",
+		"   Available Trait Options:",
+		"   - (Ancestry Trait) Kobold",
+		"   - (Lineage Trait) Lineage",
+		"   - Any trait from an exotic lineage",
+	]),
+	
+	bonusClassExtrachoices : [{
+		"class" : "tlc_ancestries",
+		"feature" : "kobold_ancestries",
 		"bonus" : 2
 	},
 	{
