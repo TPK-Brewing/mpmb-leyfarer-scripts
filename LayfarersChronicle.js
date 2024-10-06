@@ -3517,8 +3517,8 @@ SpellsList["Squeeb’s Tenacious Tendrils"] = {
 //Magic Items
 
 //Tattoos
-MagicItemsList["mikio's beast tattoos"] = {
-	name : "(TPK) Mikio's Beast Tattoos",
+MagicItemsList["mikiostro's beast tattoos"] = {
+	name : "(TPK) Mikiostro's Beast Tattoos",
 	source : ["TPK", 999],
 	type : "wonderous item",
 	rarity : "rare",
@@ -3649,16 +3649,16 @@ MagicItemsList["mikio's beast tattoos"] = {
 		recovery : "long rest"
 	},
 };
-MagicItemsList["mikio's team tattoos"] = {
-	name : "(TPK) Mikio's Team Tattoos",
+MagicItemsList["mikiostro's team tattoos"] = {
+	name : "(TPK) Mikiostro's Team Tattoos",
 	source : ["TPK", 999],
 	type : "wonderous item",
 	rarity : "rare",
 	allowDuplicates : false,
 	description : "While within 30 feet of another identical tattoo, regain 1 hit die after a short rest and if you have 2 negative death saves, make death saves at advantage.",
 };
-MagicItemsList["mikio's class tattoos"] = {
-	name : "(TPK) Mikio's Class Tattoos",
+MagicItemsList["mikiostro's class tattoos"] = {
+	name : "(TPK) Mikiostro's Class Tattoos",
 	source : ["TPK", 999],
 	type : "wonderous item",
 	rarity : "rare",
