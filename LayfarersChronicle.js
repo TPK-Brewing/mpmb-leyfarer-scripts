@@ -806,7 +806,7 @@ ClassList["tlc_ancestries"] = {
 			extrachoices : [ 'Deafening Croak', 'Wark Training' ],
 			'deafening croak' : {
 				name : "Deafening Croak",
-				description : " One attack can be replaced a thunderous bellow that affects creatures in a 15-foot cone. Each creature in that area must make a Constitution saving throw (DC = 8 + Con Mod + Prof). On a failed save, the creature takes 1d6 thunder damage and is deafened for one minute. On a successful save, it takes half as much damage and is not deafened. This damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6). You can use this ability a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+				description : " One attack can be replaced a thunderous bellow that affects creatures in a 15-foot cone. Each creature in that area must make a Constitution saving throw (DC = 8 + Con Mod + Prof). On a failed save, the creature takes 1d8 thunder damage and is deafened for one minute. On a successful save, it takes half as much damage and is not deafened. This damage increases by 1d8 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6). You can use this ability a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
 				usages : "Proficiency bonus per ",
 				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
@@ -3416,6 +3416,29 @@ FeatsList["adaptive mycelia"] = {
 
 
 // SPELLS
+
+SpellsList["Bronwyn's Words of Affirmation"] = {
+	name : "Bronwyn's Words of Affirmation",
+	classes : ["artificer", "bard", "cleric", "druid"],
+	source : [["TPK", 45]],
+	level : 2,
+	school : "Ench",
+	time : "1 bns",
+	range : "30 ft",
+	components : "V,S,M",
+	duration : "Instantaneous",
+	compMaterial : "A personal compliment",
+	description : "1 crea adv. next atk, check, or save. Atk vs. target at dis., heal max until end of their turn.",
+	descriptionFull : desc([
+		"With a series of kind words to a friend, the magic of the Green Witch can bolster an ally",
+		"and keep them safe for a brief moment. Choose an ally within range and give them a personal", 
+		"compliment to manifest the spell. That ally gains advantage on their next attack roll, ability", 
+		"check, or saving throw. In addition, attacks against this ally are made at disadvantage and any",
+		"healing they receive from spells, abilities, or items is treated as having rolled the maximum",
+		"result on any dice that would be rolled. These effects last until the end of the target",
+		"creature’s next turn.",
+	]),
+};
 
 SpellsList["Final Breath"] = {
 	name : "Final Breath",
