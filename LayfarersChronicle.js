@@ -6,7 +6,7 @@ SourceList["TPK"] = {
 	abbreviation : "TPK",
 	group : "TPK Brewing",
 	url : "https://www.tpkbrewing.com/",
-	date: "2024/06/10"
+	date: "2024/10/06"
 };
 
 function cleanup_ancestries() {
@@ -3512,4 +3512,219 @@ SpellsList["Squeeb’s Tenacious Tendrils"] = {
 		"At Higher Levels: When you cast this spell using a spell slot of 4th level or higher, the damage increases",
 		"by 1d6 for each slot level above 3rd.",
 	]),
+};
+
+//Magic Items
+
+//Tattoos
+MagicItemsList["mikio's beast tattoos"] = {
+	name : "(TPK) Mikio's Beast Tattoos",
+	source : ["TPK", 999],
+	type : "wonderous item",
+	rarity : "rare",
+	allowDuplicates : true,
+	description : "Select a tattoo to affix upon your character. They gain a permenant boon.",
+	choices : ['Jaguar', 'Eagle', 'Elk', 'Goat', 'Horse', 'Crab', 'Octopus', 'Raven', 'Snake', 'Makarubo', 'Bear', 'Fox', 'Sloth', 'Songbird', 'Owl', 'Wolf', 'Cat', 'Shark', 'Moth'],
+	'bear' : {
+		name: "Bear Beast Tattoo",
+		description : "+1d4 Str or Con saves 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'cat' : {
+		name: "Cat Beast Tattoo",
+		description : "+1d4 Dex or Cha saves 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'crab' : {
+		name : "Crab Beast Tattoo",
+		description : "Reaction as unarmed strike after being hit in melee. Usage is prof bonus per long rest",
+		action : ["reaction", "Unarmed Atk (Crab Tattoo)"],
+		usages : 3,
+		recovery : "long rest"
+	},
+	'eagle' : {
+		name : "Eagle Beast Tattoo",
+		description : "+1d4 Perception 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'elk' : {
+		name : "Elk Beast Tattoo",
+		description : "Deal +1d6 damage after moving 20 feet in a line",
+	},
+	'fox' : {
+		name: "Fox Beast Tattoo",
+		description : "+1d4 Deception 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'goat' : {
+		name : "Goat Beast Tattoo",
+		description : "Adv. on Climb checks and Con Saves against cold terrain",
+		savetxt : { text : ["Adv. Climb/Con Saves in cold"] }
+	},
+	'horse' : {
+		name : "Horse Beast Tattoo",
+		description : "Speed increases by 5 feet",
+		speed : {walk : "+5" },
+	},
+	'jaguar' : {
+		name : "Jaguar Beast Tattoo",
+		description : "Gain the cantrip 'Primal Savagery'",
+		spellcastingBonus : {
+			name : "Jaguar Beast Tattoo",
+			spells : ["primal savagery"],
+			selection : ["primal savagery"]
+		}
+	},
+	'makarubo' : {
+		name: "Makarubo Beast Tattoo",
+		description : "+1d4 Sleight of Hand 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'moth' : {
+		name: "Moth Beast Tattoo",
+		description : "Gain Darksight 60ft",
+		vision : [["Darkvision", 60]]
+	},
+	'octopus' : {
+		name : "Octopus Beast Tattoo",
+		description : "Adv. to escape grapples. Gain cantrip 'Thornwhip using your Wis Mod, 3 times daily",
+		savetxt : { text : ["Adv. to escape grapple"] },
+		spellcastingBonus : {
+			name : "Octopus Beast Tattoo",
+			times : 3,
+			spells : ["thornwhip"],
+			selection : ["thornwhip"]
+		}
+	},
+	'owl' : {
+		name: "Owl Beast Tattoo",
+		description : "+1d4 Wis or Int saves 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'raven' : {
+		name : "Raven Beast Tattoo",
+		description : "+1d4 Arcana 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'shark' : {
+		name: "Shark Beast Tattoo",
+		description : "+1d4 Intimidate 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'sloth' : {
+		name: "Sloth Beast Tattoo",
+		description : "+1d4 Insight 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'snake'	: {
+		name: "Snake Beast Tattoo",
+		description : "Crits deal +2d4 poison damage",
+		calcChanges : {
+			atkAdd : [
+				function (fields, v) {
+					fields.Description += (fields.Description ? '; ' : '') + 'Crit +2d4 poison';
+				},
+			],
+		},
+	},
+	'songbird' : {
+		name: "Songbird Beast Tattoo",
+		description : "+1d4 Performance 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+	'wolf' : {
+		name: "Wolf Beast Tattoo",
+		description : "+1d4 Survival 3 times daily",
+		usages: 3,
+		recovery : "long rest"
+	},
+};
+MagicItemsList["mikio's team tattoos"] = {
+	name : "(TPK) Mikio's Team Tattoos",
+	source : ["TPK", 999],
+	type : "wonderous item",
+	rarity : "rare",
+	allowDuplicates : false,
+	description : "While within 30 feet of another identical tattoo, regain 1 hit die after a short rest and if you have 2 negative death saves, make death saves at advantage.",
+};
+MagicItemsList["mikio's class tattoos"] = {
+	name : "(TPK) Mikio's Class Tattoos",
+	source : ["TPK", 999],
+	type : "wonderous item",
+	rarity : "rare",
+	allowDuplicates : true,
+	description : "Select a tattoo to affix upon your character. They gain a permenant boon.",
+	choices : ['Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'],
+	'artificer' : {
+		name: "Artificer Class Tattoo",
+		description : "Flash of Genius becomes a range of 60 feet."
+	 },
+	 'barbarian' : {
+		name: "Barbarian Class Tattoo",
+		description : "While raging, you have advantage on Con saves.",
+		savetxt : { text : ["Adv. on Con saves while raging"] },
+	 }, 
+	 'bard' : {
+		name: "Bard Class Tattoo",
+		description : "When out of bardic inspirations, you can take damage equal to the bardic inspiration dice instead to use the feature. Uses are prof bonus per day.",
+		usages: 3,
+		recovery : "long rest"
+	 }, 
+	 'cleric' : {
+		name: "Cleric Class Tattoo",
+		description : "Using Channel Divinity gives all allies within 30 feet advantage on their next saving throw for 1 minute."
+	 }, 
+	 'druid' : {
+		name: "Druid Class Tattoo",
+		description : "As a bonus action, you can use a wildshape to recover 2d8 + Wis Mod hit points. Once per short rest.",
+		action : ["bonus action", "Recover HP (Class Tattoo)"]
+	 }, 
+	 'fighter' : {
+		name: "Fighter Class Tattoo",
+		description : "Reroll 1's and 2's when using Second Wind."
+	 },
+	 'monk' : {
+		name: "Monk Class Tattoo",
+		description : "Reroll 1's on unarmed attack damage. You must use the second roll."
+	 },
+	 'paladin' : {
+		name: "Paladin Class Tattoo",
+		description : "Lay on Hands can be used with a reach of 30 feet."
+	 },
+	 'ranger' : {
+		name: "Ranger Class Tattoo",
+		description : "Auto pass all checks to maintain concentration of Favored Foe and Hunter's Mark."
+	 },
+	 'rogue' : {
+		name: "Rogue Class Tattoo",
+		description : "Change Sneak Attack damage to radiant, necrotic, psychic, or poison damage."
+	 },
+	 'sorcerer' : {
+		name: "Sorcerer Class Tattoo",
+		description : "Rolling a critical on a spell attack regains one sorcerty point per spell level cast. Minimum 1."
+	 },
+	 'warlock' : {
+		name: "Warlock Class Tattoo",
+		description : "Gain one additional invocation you meet the requirements for.",
+		bonusClassExtrachoices : [{
+			"class" : "warlock",
+			feature : "eldritch invocations",
+			bonus : 1
+		}],
+	 },
+	 'wizard' : {
+		name: "Wizard Class Tattoo",
+		description : "As a bonus action, recover a spell slot by lowering your max HP by 1d4 per spell level. Regain HP after long rest. Functions like Life Drain.",
+		action : ["bonus action", "Recover (Class Tattoo)"]
+	 }, 
 };
