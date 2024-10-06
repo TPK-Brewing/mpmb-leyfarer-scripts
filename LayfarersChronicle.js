@@ -1104,6 +1104,7 @@ ClassList["tlc_ancestries"] = {
 			},
 			'mentor' : {
 				name : "Mentor",
+				skills : ["Survival"],
 				spellcastingBonus : [{
 					spells : ["comprehend languages"],
 					name : "Explorer (Mentor)",
@@ -1125,6 +1126,7 @@ ClassList["tlc_ancestries"] = {
 			},
 			'mentor' : {
 				name : "Mentor",
+				skills : ["Nature"],
 				spellcastingBonus : [{
 					spells : ["detect poison and disease"],
 					name : "Naturalist (Mentor)",
@@ -1145,6 +1147,7 @@ ClassList["tlc_ancestries"] = {
 			},
 			'mentor' : {
 				name : "Mentor",
+				skills : ["History"],
 				spellcastingBonus : [{
 					spells : ["identify"],
 					name : "Scholar (Mentor)",
@@ -2712,14 +2715,6 @@ AddSubClass("warlock", "the lady of ivory", {
 	}
 });
 
-
-
-/*
-*
-* THE ONE AND ONLY BACKGROUND!
-*
-*/
-
 BackgroundList["leyfarer"] = {
 	regExpSearch : /^(?=.*leyfarer)(?=.*initiate).*$/i,
 	name : "Leyfarer Initiate",
@@ -2748,7 +2743,7 @@ AddBackgroundVariant("leyfarer", "explorer", {
 	bonusClassExtrachoices : [{
 		"class" : "tlc_ancestries",
 		"feature" : "explorer_ranks",
-		"bonus" : 4
+		"bonus" : 1
 	}],
 });
 
@@ -2759,7 +2754,7 @@ AddBackgroundVariant("leyfarer", "naturalist", {
 	bonusClassExtrachoices : [{
 		"class" : "tlc_ancestries",
 		"feature" : "naturalist_ranks",
-		"bonus" : 4
+		"bonus" : 1
 	}],
 });
 
@@ -2770,7 +2765,7 @@ AddBackgroundVariant("leyfarer", "scholar", {
 	bonusClassExtrachoices : [{
 		"class" : "tlc_ancestries",
 		"feature" : "scholar_ranks",
-		"bonus" : 4
+		"bonus" : 1
 	}],
 });
 
