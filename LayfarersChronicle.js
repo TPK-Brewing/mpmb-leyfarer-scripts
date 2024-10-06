@@ -2895,6 +2895,84 @@ AddSubClass("bard", "college of calamity", {
 	}
 });
 
+AddSubClass("cleric", "rune priest", {
+	regExpSearch : /^(?=.*rune)(?=.*priest).*$/i,
+	subname : "Rune Priest",
+	source : [["TPK", 36]],
+	spellcastingExtra : ["alarm", "catapult", "arcane lock", "branding smite", "erupting earth,", "glyph of warding", "stoneskin", "deathward", "wall of stone", "circle of power"],
+	features : {
+		"subclassfeature1" : {
+			name : "Bonus Proficiency",
+			source : [["TPK", 37]],
+			minlevel : 3,
+			description : "\n   " + "You gain proficiency with jeweler’s tools. If you already have this proficiency, " +
+			"\n   " + "you gain proficiency with one other type of artisan's tools of your choice.",
+			toolProfs : ["Mason's Tools", 1],
+			armorProfs : [false, false, true, false]
+		},
+		"subclassfeature1.1" : {
+			name : "Runecraft",
+			source : [["TPK", 37]],
+			minlevel : 1,
+			description : "\n   " + "Create magical runes on items, max half cleric level (rounded down) + prof mod. 10-minute ritual, last until you finish a long rest. Each rune can be activated once, and then vanishes. Each creature can only carry one rune-inscribed item at a time. See third page for Runes",
+			"runecraft table" : {
+				name : "Runecraft Table",
+				extraname : "Rune Priest 1",
+				source : [["TPK", 37]],
+				description : desc([
+					"Rune of Escape. As a bonus action, you can move up to your speed without provoking attacks of opportunity", 
+					"Rune of Accuracy. You can add +5 to an attack roll after it has been rolled but before it has been determined to be a success or failure.",
+					"Rune of Resilience. You can add +5 to a saving throw after it has been rolled but before it has been determined to be a success or failure.",
+					"Rune of Absorption. You can use your reaction to gain resistance to a single damage type from a single source." ,
+					"Rune of Warding. You can use your reaction to gain a +5 bonus to your Armor Class against a single incoming attack." ,
+					"Rune of Impact. You can activate this rune after making a successful melee or ranged weapon attack to add 2d6 thunder damage to the attack's normal damage.",
+				]),
+			},
+			autoSelectExtrachoices : [{ extrachoice : "runecraft table" }],
+		},
+		"subclassfeature2" : {
+			name : "Channel Divinity: Rune of Destruction",
+			source : [["TPK", 37]],
+			minlevel : 2,
+			description : "\n   " + "As an action, summon a 10-foot square rune on the ground I can see within 60 feet. Creatures inside the rune make a Con Saving Throw. Take 3d6 force dmg and stunned until end of their next turn on fail. Save half, no stun.",
+			action : ["action", ""]
+		},
+		"subclassfeature6" : {
+			name : "Connecting Runes",
+			source : [["TPK", 30]],
+			minlevel : 6,
+			description : desc([  
+				"- Creatures carrying one or more items inscribed with your runes gain +1 to AC.",
+				"- As a bonus action, you can activate one of your runes being worn by any creature",
+				" within 60 feet. When activated in this way, instead of the rune's normal ability",
+				" it heals them for 2d6 + your Wisdom modifier. After this, the rune vanishes.",
+				"- When a creature activates one of your runes, they also gain 5 temporary hit points.",
+				"- Creatures can carry a number of items with your runes equal to their prof bonus.",
+			]),
+			action: ["bonus action", ""]
+		},
+		"subclassfeature8" : {
+			name : "Runic Weapon",
+			source : [["TPK", 38]],
+			minlevel : 8,
+			description : "\n   " + "After a long rest you can inscribe a personal rune your weapon with radiant, fire, lightning, thunder, cold, acid, or necrotic. Deals an additional 1d6 damage of the chosen type. Advantage to hit elementals and constructs.",
+		},
+		"subclassfeature17" : {
+			name : "Runemaster",
+			source : [["TPK", 38]],
+			minlevel : 17,
+			description : desc([  
+				"- Each rune you inscribe can be activated 2 times before vanishing.",
+				"- As long as you aren’t incapacitated, you gain the benefits of the",
+				" Stoneskin spell without requiring concentration.",
+				"- You can expend a spell slot of 3rd level or higher to inscribe a",
+				" rune as an action. This rune does not count towards your maximum number of runes.",
+			]),
+			action : ["action", ""],
+		}
+	}
+});
+
 AddSubClass("fighter", "frog knight", {
 	regExpSearch : /^(?=.*frog)(?=.*knight).*$/i,
 	subname : "Frog Knight",
