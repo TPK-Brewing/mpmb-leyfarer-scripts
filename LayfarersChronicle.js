@@ -2914,7 +2914,7 @@ AddSubClass("cleric", "rune priest", {
 			name : "Runecraft",
 			source : [["TPK", 37]],
 			minlevel : 1,
-			description : "\n   " + "Create magical runes on items, max half cleric level (rounded down) + prof mod. 10-minute ritual, last until you finish a long rest. Each rune can be activated once, and then vanishes. Each creature can only carry one rune-inscribed item at a time. See third page for Runes",
+			description : "\n   " + "Create magical runes on items, max half cleric level (rounded down) + prof mod. 10-minute ritual, last until you finish a long rest. Each rune can be activated once, and then vanishes. Each creature can only carry one rune-inscribed item at a time. See 3rd page for Runes",
 			"runecraft table" : {
 				name : "Runecraft Table",
 				extraname : "Rune Priest 1",
@@ -3098,7 +3098,7 @@ AddSubClass("ranger", "ghostscale reaver", {
 			minlevel : 11,
 			description : desc([
 				"When you are reduced to 0 hit points, you manifest an aura of spirits within 10 feet.",
-				"Full Information on third page."
+				"Full Information on 3rd page."
 
 			]),
 			"death's chosen" : {
@@ -3128,6 +3128,86 @@ AddSubClass("ranger", "ghostscale reaver", {
 				"the end of your next turn.",
 			]),
 			action : ["reaction", ""],
+		},
+	}
+});
+
+AddSubClass("rogue", "gambler", {
+	regExpSearch : /^(?=.*gambler).*$/i,
+	subname : "Gambler",
+	source : ["TPK", 42],
+	features : {
+		"subclassfeature3" : {
+			name : "High Roller",
+			source : [["TPK", 43]],
+			minlevel : 3,
+			description : "\n   " + "Gain proficiency with the dice set and playing card set. You can use either of these gaming sets instead of thieves’ tools when attempting to disarm traps or open locks.",
+			toolProfs : ["Dice Set or Card Set"]
+		},
+		"subclassfeature3.1" : {
+			name : "Lucky Number",
+			source : [["TPK", 43]],
+			minlevel : 3,
+			description : desc([ 
+				"After a long rest, roll 1d20 and record the number rolled.",
+				"Until you finish another long rest, whenever you roll your lucky number on an attack, the",
+				"result is a critical hit. If your lucky number is 20, roll the attack’s damage dice three times",
+				"instead of twice.",
+		    ]),
+		},
+		"subclassfeature9" : {
+			name : "Hedge Your Bets",
+			source : [["TPK", 43]],
+			minlevel : 9,
+			description : desc([
+				"You can use the abilities listed on the 3rd page equal to your prof bonus per short rest.",
+			]),
+			"hedge your bets" : {
+				name : "Hedge Your Bets",
+				extraname : "Gambler 9",
+				source : [["TPK", 43]],
+				description : desc([
+				"- Side Bet. Before an attack roll, you can bet that the number on the die will be even or odd. If you are correct, you can make the attack with advantage, immediately rolling the second die.",
+				"- Split Bet. When you roll an attack with advantage and both dice show the same number, you can split them into two separate attacks, using the numbers rolled. The extra attack is a free action and can be made against a different creature, and if applicable, you can split your sneak attack dice between the two targets before rolling.",
+				"- Sure Bet. Before making an attack roll with advantage, you can choose to instead roll only one die and add your proficiency bonus an additional time to the result. This still counts as having advantage for the purpose of sneak attack.",
+				])
+			},
+			autoSelectExtrachoices : [{ extrachoice : "hedge your bets" }],
+			recovery : "short rest",
+			usages : "Proficiency modifier per ",
+			usagescalc : "event.value = Math.max(1, What('Proficiency Bonus'));",
+		},
+		"subclassfeature13" : {
+			name : "Poker Face",
+			source : [["TPK", 30]],
+			minlevel : 13,
+			description : desc([
+				"When you are reduced to 0 hit points, you manifest an aura of spirits within 10 feet.",
+				"Full Information on third page."
+
+			]),
+			"poker face" : {
+				name : "Poker Face",
+				extraname : "Gambler 13",
+				source : [["TPK", 30]],
+				description : desc([
+					"your face becomes an inscrutable mask. You gain the benefit listed on the 3rd page.",
+					"- Proficiency in Deception. If you are already proficient in the skill, you add double your proficiency bonus to checks you make with it.",
+					"- You have advantage on saving throws against spells and abilities that detect lies or thoughts.",
+					"- After making an attack on your turn, your movement doesn’t provoke opportunity attacks.",
+				])
+			},
+			autoSelectExtrachoices : [{ extrachoice : "poker face" }],
+			savetxt : { text : ["Adv. on spells/ability to detect lies/thoughts"] },
+			skills: [ "Deception", "increment"],
+		},
+		"subclassfeature17" : {
+			name : "All In",
+			source : [["TPK", 43]],
+			minlevel : 17,
+			description : desc([
+				"When you roll your sneak attack damage, you can choose to roll 1d6 and use the result for all your sneak attack dice. On a result of 1 or 2, your next attack has advantage.",
+			]),
 		},
 	}
 });
