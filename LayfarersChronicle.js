@@ -184,6 +184,7 @@ ClassList["tlc_ancestries"] = {
 				name : "Improvised Spell",
 				description : " Using this trait, you can cast any wizard cantrip, and Intelligence is your spellcasting ability for it. You can use this trait a number of times per long rest equal to your proficiency bonus.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 				spellcastingAbility : 4
 			},
@@ -807,6 +808,7 @@ ClassList["tlc_ancestries"] = {
 				name : "Deafening Croak",
 				description : " One attack can be replaced a thunderous bellow that affects creatures in a 15-foot cone. Each creature in that area must make a Constitution saving throw (DC = 8 + Con Mod + Prof). On a failed save, the creature takes 1d6 thunder damage and is deafened for one minute. On a successful save, it takes half as much damage and is not deafened. This damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6). You can use this ability a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 			},
 			'wark training' : {
@@ -849,8 +851,8 @@ ClassList["tlc_ancestries"] = {
 				],
 			},
 		},
-		"kobold_vangrant_ancestries" : {
-			name : "(Origin Trait) Vangrant",
+		"kobold_vagrant_ancestries" : {
+			name : "(Origin Trait) Vagrant",
 			source : [["TPK", 15]],
 			description : "",
 			extraname : "Origin Trait",
@@ -863,6 +865,8 @@ ClassList["tlc_ancestries"] = {
 				name : "Piercing Cry",
 				description : " As a reaction, before rolling dex save, you and your allies within 10 feet add 1d4 to save. You can use this ability a number of times equal to your proficiency bonus, regain on short rest.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
+				recovery : "short rest",
 				action : [
 					["reaction", "Piercing Cry"]
 				],
@@ -873,7 +877,7 @@ ClassList["tlc_ancestries"] = {
 			name : "(Origin Trait) Sovereign",
 			source : [["TPK", 15]],
 			description : "",
-			extraname : "Origin Trait",
+			extraname : "Sovereigns Gift",
 			extrachoices : [ 'Draconic Aegis', 'Dragons Breath', 'Sovereigns Gift' ],
 			'draconic aegis' : {
 				name : "Draconic Aegis",
@@ -910,6 +914,7 @@ ClassList["tlc_ancestries"] = {
 				name : "Dragons Breath",
 				description : " Replace one of your attacks with a breath weapon. Creatures save in a 30-foot line save against your Consititution (8 + Con Mod + Prof). Targets take 1d10 damage, save halves. Increases by 1d10 at levels 5, 11, and 17.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 				weaponOptions : [{
 					regExpSearch : /^(?=.*dragons)(?=.*breath).*$/i,
@@ -973,7 +978,7 @@ ClassList["tlc_ancestries"] = {
 				}],
 			},
 		},
-		"sovereign_gift_ancestries" : {
+		"sovereigns_gift_ancestries" : {
 			name : "(Origin Trait) Sovereign Gift",
 			source : [["TPK", 15]],
 			description : "",
@@ -989,6 +994,7 @@ ClassList["tlc_ancestries"] = {
 				source : [["TPK", 19]],
 				description : " When you deal lightning or thunder damage, you can use this trait to reroll a number of damage dice up to your Constitution modifier. You must use the new result. You can use this ability a number of times per long rest equal to your proficiency bonus.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 			},
 			'sovereigns gift of the mindsire' : {
@@ -1166,6 +1172,7 @@ ClassList["tlc_ancestries"] = {
 				source : [["TPK", 19]],
 				description : " When you deal lightning or thunder damage, you can use this trait to reroll a number of damage dice up to your Constitution modifier. You must use the new result. You can use this ability a number of times per long rest equal to your proficiency bonus.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 			},
 			'gift of the mindsire' : {
@@ -1225,6 +1232,7 @@ ClassList["tlc_ancestries"] = {
 				source : [["TPK", 19]],
 				description : " Scar-like spiral patterns cover your skin. When one of your attacks deals damage to a creature, reduce the target’s temporary hit points to zero before calculating damage. You can use this ability a number of times per long rest equal to your proficiency bonus.",
 				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 			},
 			'aspect of the sleeping one' : {
@@ -3144,6 +3152,7 @@ FeatsList["adaptive mycelia"] = {
 	allowDuplicates: false,
 	recovery : "long rest",
 	usages : "Proficiency bonus per ",
+	usagescalc : "event.value = How('Proficiency Bonus');",
 	action : ["reaction", ""],
 	scores : [0, 0, 1, 0, 0, 0],
 };
