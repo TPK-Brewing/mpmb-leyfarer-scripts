@@ -887,28 +887,127 @@ ClassList["tlc_ancestries"] = {
 					var theChoice = AskUserOptions('Draconic Aegis', 'The Draconic Aegis Ancestry offers a choice of a damage resistance. You can change this selection by unselecting the ancestry and re-selecting it.', AEoptions, 'radio', true);
 					switch (theChoice) {
 						case "Cold":
-							SetProf("dmgres", true, "Cold", "Draconic Aegis");
+							SetProf("resistance", true, 'cold', "Draconic Aegis");
 							break;
 						case "Fire":
-							SetProf("dmgres", true, "Fire", "Draconic Aegis")
+							SetProf("resistance", true, 'fire', "Draconic Aegis")
 							break;
 						case "Force":
-							SetProf("dmgres", true, "Force", "Draconic Aegis")
+							SetProf("resistance", true, 'force', "Draconic Aegis")
 							break;
 						case "Lightning":
-							SetProf("dmgres", true, "Lightning", "Draconic Aegis")
+							SetProf("resistance", true, 'lightning', "Draconic Aegis")
 							break;
 						case "Psychic":
-							SetProf("dmgres", true, "Psychic", "Draconic Aegis")
+							SetProf("resistance", true, 'psychic', "Draconic Aegis")
 							break;
 						case "Radiant":
-								SetProf("dmgres", true, "Radiant", "Draconic Aegis")
+								SetProf("resistance", true, 'radiant', "Draconic Aegis")
 								break;
 						case "Thunder":
-							SetProf("dmgres", true, "Thunder", "Draconic Aegis")
+							SetProf("resistance", true, 'thunder', "Draconic Aegis")
 							break;
 					};
 				},
+				armorOptions : [
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*unarmored).*$/i,
+					name : "Draconic Aegis Unarmored (Con)",
+					source : [["TPK", 12]],
+					ac : "10+Con",
+					dex : -10,
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*mage).*$/i,
+					name : "Draconic Aegis Mage armor (Con)",
+					source : [["TPK", 12]],
+					ac : "13+Con",
+					list : "magic",
+					affectsWildShape : true,
+					dex : -10,
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*padded).*$/i,
+					name : "Draconic Aegis Padded (Con)",
+					source : [["TPK", 12]],
+					type : "light",
+					ac : "11+Con",
+					stealthdis : true,
+					weight : 8,
+					strReq : 0,
+					dex : -10,
+					invName : "Draconic Aegis Padded armor"
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*leather).*$/i,
+					name : "Draconic Aegis Leather (Con)",
+					source : [["TPK", 12]],
+					type : "light",
+					ac : "11+Con",
+					dex : -10,
+					weight : 10,
+					invName : "Leather armor"
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*studded).*$/i,
+					name : "Draconic Aegis Studded leather (Con)",
+					source : [["TPK", 12]],
+					type : "light",
+					ac : "12+Con",
+					dex : -10,
+					weight : 13,
+					invName : "Studded leather armor"
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*hide).*$/i,
+					name : "Draconic Aegis Hide (Con)",
+					source : [["TPK", 12]],
+					type : "medium",
+					ac : "12+min(oCon|2)",
+					weight : 12,
+					dex : -10,
+					invName : "Hide armor"
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*chain).*$/i,
+					name : "Draconic Aegis Chain shirt (Con)",
+					source : [["TPK", 12]],
+					type : "medium",
+					ac : "13+min(oCon|2)",
+					dex : -10,
+					weight : 20
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*scale).*$/i,
+					name : "Draconic Aegis Scale mail (Con)",
+					source : [["TPK", 12]],
+					type : "medium",
+					ac : "14+min(oCon|2)",
+					dex : -10,
+					stealthdis : true,
+					weight : 45
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*breastplate).*$/i,
+					name : "Draconic Aegis Breastplate (Con)",
+					source : [["TPK", 12]],
+					type : "medium",
+					ac : "14+min(oCon|2)",
+					dex : -10,
+					weight : 20
+				},
+				{
+					regExpSearch : /^(?=.*draconic)(?=.*aegis)(?=.*half).*$/i,
+					name : "Draconic Aegis Half plate (Con)",
+					source : [["TPK", 12]],
+					type : "medium",
+					ac : "15+min(oCon|2)",
+					stealthdis : true,
+					weight : 40,
+					dex : -10,
+					invName : "Half plate armor"
+				},
+				],
 			},
 			'dragons breath' : {
 				name : "Dragons Breath",
