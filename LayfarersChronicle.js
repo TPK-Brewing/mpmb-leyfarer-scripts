@@ -545,7 +545,7 @@ ClassList["tlc_ancestries"] = {
 			extrachoices : [ 'Blindsight', 'Charming Features', 'Cheek Pouches', 'Gnawing Teeth Medium', 'Gnawing Teeth Small', 'Murine Moxie', 'Swarm' ],
 			'blindsight' : {
 				name : "Blindsight",
-				description : " Your keen senses of hearing and smell give you blindsight with a range of 30 feet. Within that range, you can effectively see anything that isn’t behind total cover, even if you’re blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
+				description : " Your keen senses of smell give you blindsight with a range of 30 feet. You can effectively see anything that isn’t behind total cover, even if you’re blinded or in darkness. You can see an invisible creature within that range, unless the creature successfully hides from you. Smell only, cannot be used underwater.",
 				vision : [
 					["Blindsight", 30],
 				],
@@ -830,7 +830,7 @@ ClassList["tlc_ancestries"] = {
 			extrachoices : [ 'Blindsight', 'Improvised Ingenuity', 'Tunnel Fighter', 'Underfoot' ],
 			'blindsight' : {
 				name : "Blindsight",
-				description : " You have blindsight with a range of 30 feet.",
+				description : " You have blindsight with a range of 30 feet. Based on sound and does not work when deafened.",
 				vision : [
 					["Blindsight", 30],
 				],
@@ -1232,10 +1232,12 @@ ClassList["tlc_ancestries"] = {
 			extraname : "Exotic Lineage",
 			extrachoices : [ 'Blessed Birth', 'Cursed Birth', 'Gift of the Cindergale', 'Gift of the Levintide', 'Gift of the Mindsire', 'Gift of the Mooneater', 'Gift of the Mourningstar', 'Gift of the Neverbeast', 'Gift of the Windrose',
 					'Aspect of the Buried One', 'Aspect of the Burning One', 'Aspect of the Caged One', 'Aspect of the Sleeping One', 'Aspect of the Wandering One',
-					'Effortless Enchantment', 'Guarded Mind', 'Hybrid Flora', 'Unwavering Focus', 'Weald Walker',],
+					'Effortless Enchantment', 'Guarded Mind', 'Hybrid Flora', 'Unwavering Focus', 'Weald Walker', 'Crown of Blades', 'Halo of Eyes', 'Harbinger of Death', 'Number the Stars', 'Plumage of the Sun',
+					'Song of Extinction', 'Fiendish Design', 'Fire from Dust', 'Honeyed Words', 'Sanguine Rubies', 'Spellbound Flesh', 'Written in Blood',],
 			'blessed birth' : {
 				name : "Blessed Birth",
 				source : [["TPK", 18]],
+				submenu: "Blessed/Cursed Birth",
 				description : " You gain a fate die. When you make a roll using a d20, you can choose to expend your fate die to replace the number on the die with 10. You regain expended fate dice on a long rest. In addition, you can cast Bless once per long rest, using Charisma as your spellcasting ability.",
 				usages : 1,
 				recovery : "long rest",
@@ -1250,6 +1252,7 @@ ClassList["tlc_ancestries"] = {
 			'cursed birth' : {
 				name : "Cursed Birth",
 				source : [["TPK", 18]],
+				submenu: "Blessed/Cursed Birth",
 				description : " You gain a fate die. When you make a roll using a d20, you can choose to expend your fate die to replace the number on the die with 10. You regain expended fate dice on a long rest. In addition, you can cast Bane once per long rest, using Charisma as your spellcasting ability.",
 				usages : 1,
 				recovery : "long rest",
@@ -1264,11 +1267,13 @@ ClassList["tlc_ancestries"] = {
 			'gift of the cindergale' : {
 				name : "Gift of the Cindergale",
 				source : [["TPK", 19]],
+				submenu: "Draconic Lineage",
 				description : " When your spells or abilities deal fire damage to a creature or object that has fire resistance, the amount of damage is not reduced. When your spells or abilities deal fire damage to a creature or object that is immune to fire, it is dealt damage as though it was resistant to fire instead."
 			},
 			'gift of the levintide' : {
 				name : "Gift of the Levintide",
 				source : [["TPK", 19]],
+				submenu: "Draconic Lineage",
 				description : " When you deal lightning or thunder damage, you can use this trait to reroll a number of damage dice up to your Constitution modifier. You must use the new result. You can use this ability a number of times per long rest equal to your proficiency bonus.",
 				usages : "Proficiency bonus per ",
 				usagescalc : "event.value = How('Proficiency Bonus');",
@@ -1277,6 +1282,7 @@ ClassList["tlc_ancestries"] = {
 			'gift of the mindsire' : {
 				name : "Gift of the Mindsire",
 				source : [["TPK", 19]],
+				submenu: "Draconic Lineage",
 				description : " You gain a number of charges equal to your proficiency bonus minus 1. As an action, spend any number of charges to gain a spell slot. The level of this spell slot is equal to the number of charges spent. When you take a long rest, you regain your spent charges and lose any spell slots created using this trait.",
 				action : [ "action", "Gift of the Mindsire"],
 				usages : "Proficiency bonus per ", 
@@ -1286,16 +1292,19 @@ ClassList["tlc_ancestries"] = {
 			'gift of the mooneater' : {
 				name : "Gift of the Mooneater",
 				source : [["TPK", 20]],
+				submenu: "Draconic Lineage",
 				description : " You have the ability to communicate telepathically with creatures that can breathe underwater. In addition, when you roll a 1 on a damage die for a spell or ability that deals cold damage, you can reroll the die. You must use the new roll."
 			},
 			'gift of the mourningstar' : {
 				name : "Gift of the Mourningstar",
 				source : [["TPK", 20]],
+				submenu: "Draconic Lineage",
 				description : " You can maintain concentration on two spells at the same time, provided that at least one is a divination spell. If you lose concentration for any reason, including failing a concentration check or becoming incapacitated, you lose concentration on both spells."
 			},
 			'gift of the neverbeast' : {
 				name : "Gift of the Neverbeast",
 				source : [["TPK", 20]],
+				submenu: "Draconic Lineage",
 				description : " Spells and abilities that affect monstrosities also affect you. In addition, your spells and abilities that reference beasts also include monstrosities with an Intelligence score of 4 or less and monstrosities that don’t comprehend any languages.",
 				savetxt : {
 					text : ["Affected by Monstrosites spells/abilites"]
@@ -1304,6 +1313,7 @@ ClassList["tlc_ancestries"] = {
 			'gift of the windrose' : {
 				name : "Gift of the Windrose",
 				source : [["TPK", 20]],
+				submenu: "Draconic Lineage",
 				description : " While singing, you have advantage on checks made to navigate through wilderness and to detect the presence of secret doors."
 			},
 			'aspect of the buried one' : {
@@ -1314,6 +1324,7 @@ ClassList["tlc_ancestries"] = {
 			'aspect of the burning one' :{
 				name : "Aspect of the Burning One",
 				source : [["TPK", 19]],
+				submenu: "Divine Lineage",
 				description : " Your eyes are the color of fire, with red-orange sclera and yellow irises. When you deal bludgeoning, piercing, or slashing damage using a weapon attack, you can instead choose to deal fire damage.",
 				calcChanges : {
 					atkAdd : [
@@ -1329,6 +1340,7 @@ ClassList["tlc_ancestries"] = {
 			'aspect of the caged one' : {
 				name : "Aspect of the Caged One",
 				source : [["TPK", 19]],
+				submenu: "Divine Lineage",
 				description : " Scar-like spiral patterns cover your skin. When one of your attacks deals damage to a creature, reduce the target’s temporary hit points to zero before calculating damage. You can use this ability a number of times per long rest equal to your proficiency bonus.",
 				usages : "Proficiency bonus per ",
 				usagescalc : "event.value = How('Proficiency Bonus');",
@@ -1337,32 +1349,38 @@ ClassList["tlc_ancestries"] = {
 			'aspect of the sleeping one' : {
 				name : "Aspect of the Sleeping One",
 				source : [["TPK", 19]],
+				submenu: "Divine Lineage",
 				description : " Flower buds grow in your hair. After you take a short rest, you regain one expended spell slot of your choice. The level of this spell slot must be less than or equal to your proficiency bonus.",
 			},
 			'aspect of the wandering one' : {
 				name : "Aspect of the Wandering One",
 				source : [["TPK", 19]],
+				submenu: "Divine Lineage",
 				description : " After you take a short rest, you can change your appearance/voice. You determine the specifics of the changes. You can adjust height/weight and change size between Medium/Small. You can as another ancestry. It must be an individual you have seen and you cannot change your pupil shape.",
 			},
 			'effortless enchantment' : {
 				name : "Effortless Enchantment",
 				source : [["TPK", 20]],
+				submenu: "Wyd-touched Lineage",
 				description : " You can maintain concentration on two spells at once, provided that at least one is an enchantment spell. If you lose concentration for any reason, including failing a concentration check or becoming incapacitated, you lose concentration on both spells.",
 			},
 			'guarded mind' : {
 				name : "Guarded Mind",
 				source : [["TPK", 20]],
+				submenu: "Wyd-touched Lineage",
 				description : " You have advantage on saving throws against charm, memory loss, and other mind-altering effects.",
 				savetxt : { text : ["Adv. against charm, mem lost, mind effects"] }
 			},
 			'hybrid flora' : {
 				name : "Hybrid Flora",
 				source : [["TPK", 21]],
+				submenu: "Wyd-touched Lineage",
 				description : " Your spells and abilities that refer to beasts also refer to plants.",
 			},
 			'unwavering focus' : {
 				name : "Unwavering Focus",
 				source : [["TPK", 21]],
+				submenu: "Wyd-touched Lineage",
 				description : " While you aren’t maintaining concentration on any spells, your spell attack bonus and spell save DC are both increased by half of your proficiency bonus, rounded down. [Not calulated in sheet]",
 				calcChanges : {
 					atkCalc : [
@@ -1406,12 +1424,193 @@ ClassList["tlc_ancestries"] = {
 			'weald walker' : {
 				name : "Weald Walker",
 				source : [["TPK", 21]],
+				submenu: "Wyd-touched Lineage",
 				description : " In forested areas you are unaffected by difficult terrain due to plants, and you have advantage on saving throws and ability checks to avoid or escape being grappled by plants.",
 				savetxt : { text : ["Adv. against grapple from plants"] }
-			}
+			},
+			'crown of blades' : {
+				name : "Crown of Blades",
+				source : [["TPK", 25]],
+				savetxt : {
+					text : ["Affected by Celestial spells/abilites"]
+				},
+				submenu: "Celestial Lineage",
+				description : " Bonus action, curved blades erupt from your head in the shape of a crown. Choose radiant or necrotic dmg. Your weapon/spell attacks that deal bldg, pierce, or slash deal that type instead. Gain same resistance. Lasts for 1 minute, restore on short or long rest.",
+				usages : 1,
+				recovery : "short rest",
+				action: ["bonus action", ""]
+			},
+			'halo of eyes' : {
+				name : "Halo of Eyes",
+				source : [["TPK", 25]],
+				savetxt : {
+					text : ["Affected by Celestial spells/abilites"]
+				},
+				submenu: "Celestial Lineage",
+				description : " Action, You can see in normal and magical darkness, invisible creatures and objects. Advantage on rolls to detect visual illusions. You become restrained. Requires concentration, lasts up to 1 minute, restore on long rest.",
+				usages : 1,
+				recovery : "long rest",
+				action: ["action", ""]
+			},
+			'harbinger of death' : {
+				name : "Harbinger of Death",
+				source : [["TPK", 25]],
+				savetxt : {
+					text : ["Affected by Celestial spells/abilites"]
+				},
+				submenu: "Celestial Lineage",
+				description : " Bonus Action, touch a creature with 0 hit points and it becomes stable. If the creature previously succeeded on one or more death saving throws, it regains 1 HP. Your weapon attacks deal an additional 1d4 necrotic damage for each death saving throw that the creature failed before being stabilized. Lasts up to 1 minute, restore on short or long rest.",
+				usages : 1,
+				recovery : "short rest",
+				action: ["bonus action", ""]
+			},
+			'number the stars' : {
+				name : "Number the Stars",
+				source : [["TPK", 25]],
+				savetxt : {
+					text : ["Affected by Celestial spells/abilites"]
+				},
+				submenu: "Celestial Lineage",
+				description : " Bonus Action, choose one of the following:\n • Teleport to an unoccupied space within 30 feet of you that you can see. Must land within 5 feet of one of your allies.\n • A willing creature within 30 feet of you is magically teleported to an unoccupied space within 5 feet of you that you can see.",
+				usages : "Proficiency bonus per",
+				recovery : "long rest",
+				action: ["bonus action", ""]
+			},
+			'plumage of the sun' : {
+				name : "Plumage of the Sun",
+				source : [["TPK", 26]],
+				savetxt : {
+					text : ["Affected by Celestial spells/abilites"]
+				},
+				submenu: "Celestial Lineage",
+				description : " Bonus Action, gain fly speed equal to walk speed, resistance to fire for 1 minute.",
+				speed : { fly : { spd : "walk", enc : 0 } },
+				dmgres : ["Fire", "Fire (when Plumage of the Sun activated)"],
+				usages : "Proficiency bonus per",
+				recovery : "long rest",
+				action: ["bonus action", ""]
+			},
+			'song of extinction' : {
+				name : "Song of Extinction",
+				source : [["TPK", 26]],
+				savetxt : {
+					text : ["Affected by Celestial spells/abilites"]
+				},
+				submenu: "Celestial Lineage",
+				description : " Bonus Action, end of each of your turns, each non-celestial creature within 10 feet of you that can hear takes necrotic damage equal to your proficiency bonus. Creatures in this area lose resist. to necrotic, radiant, thunder damage. Lasts 1 minute, bonus action to end early.",
+				usages : 1,
+				recovery : "long rest",
+				action: ["bonus action", ""]
+			},
+
+			'fiendish design' : {
+				name : "Fiendish Design",
+				source : [["TPK", 28]],
+				savetxt : {
+					text : ["Affected by Fiend spells/abilites"]
+				},
+				submenu: "Infernal Lineage",
+				description : " Bonus Action, end of each of your turns, each non-celestial creature within 10 feet of you that can hear takes necrotic damage equal to your proficiency bonus. Creatures in this area lose resist. to necrotic, radiant, thunder damage. Lasts 1 minute, bonus action to end early.",
+				speed : { fly : { spd : "walk", enc : 0 } },
+				weaponsAdd : ["Fiendish Claws (Fiendish Design)"],
+				weaponOptions : {
+					regExpSearch : /^(?=.*fiendish)(?=.*claws).*$/i,
+					name : "Fiendish Claws",
+					baseWeapon : "unarmed strike",
+					damage : [1, 6, "necrotic"],
+					modifiers : ["", "Cha"],
+					range : "Melee",
+					abilitytodamage : false,
+				},
+				usages : "Proficiency bonus per",
+				recovery : "long rest",
+				action: ["bonus action", ""]
+			},
+			'fire from dust' : {
+				name : "Fire from Dust",
+				source : [["TPK", 28]],
+				savetxt : {
+					text : ["Affected by Fiend spells/abilites"]
+				},
+				submenu: "Infernal Lineage",
+				description : " You can spend hit dice to enhance your abilitie in the following ways:\n • When you take the move action, you can spend 1 hit die to increase your speed by 10 until the end of the turn.\ • When you make a Strength (Athletics) check, you can spend 2 hit dice to roll with advantage.\n • When you take the attack action, you can spend 3 hit dice to make one additional attack.",
+			},
+			'honeyed words' : {
+				name : "Honeyed Words",
+				source : [["TPK", 28]],
+				savetxt : {
+					text : ["Affected by Fiend spells/abilites"]
+				},
+				submenu: "Infernal Lineage",
+				description : " When you successfully charm a creature and that spell ends, you can chose for them to remain unaware they were charmed.",
+				usages : "Proficiency bonus per",
+				recovery : "long rest",
+			},
+			'sanguine rubies' : {
+				name : "Sanguine Rubies",
+				source : [["TPK", 28]],
+				savetxt : {
+					text : ["Affected by Fiend spells/abilites"]
+				},
+				submenu: "Infernal Lineage",
+				description : " When you make a saving throw against a spell, reaction to gain advantage on save. If you succeed, gain temp HP equal to twice your proficiency bonus.",
+				usages : "Proficiency bonus per",
+				recovery : "long rest",
+				action: ["reaction", ""]
+			},
+			'spellbound flesh' : {
+				name : "Spellbound Flesh",
+				source : [["TPK", 28]],
+				savetxt : {
+					text : ["Affected by Fiend spells/abilites"]
+				},
+				submenu: "Infernal Lineage",
+				description : " At 1st level, gain a cantrip. 3rd level, gain a 1st level spell. 5th level, gain 2nd level spell. Spells must be Ench, Conj, or deal fire/cold. Cha is the spellcasting ability. You get the ability to select them on your spell sheet but spells are not available until the proper levels!",
+				spellcastingBonus : [
+				{
+					'class' : ['wizard','bard','cleric','sorcerer','druid', 'warlock'],
+					name : "Spellbound Flesh (Cantrip)",
+					spellcastingAbility : 6,
+					level : [0, 0],
+					times: 1,
+					firstCol : "atwill",
+				},
+				{
+					spells : ["animal friendship","arms of hadar","bane","bless","charm person","command","compelled duel","dissonant whispers","ensnaring strike","entangle","find familiar","fog cloud","goodberry","grease","hail of thorns","heroism","hex","ice knife","sleep","tasha's hideous laughter","tenser's floating disk","unseen servant","armor of agathys","burning hands","chaos bolt","chromatic orb","hellish rebuke","searing smite",],
+					name : "Spellbound Flesh (1st level)",
+					recovery : "long rest",
+					spellcastingAbility : 6,
+					times : 1,
+					firstCol : "oncelr",
+				},
+				{
+					spells : ["animal messenger","calm emotions","cloud of daggers","crown of madness","dust devil","enthrall","find steed","flaming sphere","healing spirit","hold person","misty step","spray of cards","suggestion","summon beast","tasha's mind whip","web","aganazzar's scorcher","dragon's breath","flame blade","heat metal","rime's binding ice","scorching ray","snilloc's snowball swarm",],
+					name : "Spellbound Flesh (2nd level)",
+					recovery : "long rest",
+					spellcastingAbility : 6,
+					times : 1,
+					firstCol : "oncelr",
+				},
+				]
+
+			},
+			'written in blood' : {
+				name : "Spellbound Flesh",
+				source : [["TPK", 29]],
+				savetxt : {
+					text : ["Affected by Fiend spells/abilites"]
+				},
+				submenu: "Infernal Lineage",
+				description : " When you take a short rest, you can spend hit dice to gain one of the following until the next long rest:\n • Spend one hit die to gain proficiency with one language of your choice or replace a proficiency gained in this way.\n • Spend two hit dice to gain proficiency in one skill or tool of your choice or replace a proficiency gained in this way.\n • Spend three hit dice to gain proficiency with one weapon or saving throw of your choice or replace a proficiency gained in this way.",
+			},
+			
+
 		},
 
+		//
 		/* Background Features */
+		//
+		//
 		"explorer_ranks" : {
 			name : "Explorer Ranks",
 			source : [["TPK", 26]],
@@ -3430,10 +3629,10 @@ SpellsList["Bronwyn's Words of Affirmation"] = {
 	compMaterial : "A personal compliment",
 	description : "1 crea adv. next atk, check, or save. Atk vs. target at dis., heal max until end of their turn.",
 	descriptionFull : desc([
-		"With a series of kind words to a friend, the magic of the Green Witch can bolster an ally",
+		"With a series of kind words to a friend, the magic of the Green Witch can bolster a target creature",
 		"and keep them safe for a brief moment. Choose an ally within range and give them a personal", 
-		"compliment to manifest the spell. That ally gains advantage on their next attack roll, ability", 
-		"check, or saving throw. In addition, attacks against this ally are made at disadvantage and any",
+		"compliment to manifest the spell. That creature gains advantage on their next attack roll, ability", 
+		"check, or saving throw. In addition, attacks against this creature are made at disadvantage and any",
 		"healing they receive from spells, abilities, or items is treated as having rolled the maximum",
 		"result on any dice that would be rolled. These effects last until the end of the target",
 		"creature’s next turn.",
