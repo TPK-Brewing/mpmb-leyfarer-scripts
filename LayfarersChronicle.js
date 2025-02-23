@@ -3600,7 +3600,7 @@ GearList["leyfarer's emblem"] = {
 
 FeatsList["adaptive mycelia"] = {
 	name : "Adaptive Mycelia",
-	source : [["TPK", 31]],
+	source : [["TPK", 48]],
 	description :
 		"When damaged, use a reaction to make a melee spell attack against the attacker within 30ft."
 		+ " Your attack bonus is equal to your Con mod + Prof Bonus. Spend 1 hit die for damage (necro). +1 hit die at levels 4 and 8."
@@ -3611,6 +3611,32 @@ FeatsList["adaptive mycelia"] = {
 	usagescalc : "event.value = How('Proficiency Bonus');",
 	action : ["reaction", ""],
 	scores : [0, 0, 1, 0, 0, 0],
+};
+
+FeatsList["might and mettle"] = {
+	name : "Might and Mettle",
+	source : [["TPK", 48]],
+	description : "When mounted, can  wield a glaive, halberd, lance, pike, or spear in one hand as if it was two. Adv. against huge or larger creatures when mounted using said weapons.\n When dealing damage to a monstrosity with weapon attack, att Str or Dex to damage, whichever one isn't already used. [+1 Str or Dex]",
+	allowDuplicates: false,
+	scorestxt : "+1 Strength or Dexterity"
+};
+
+FeatsList["white as a swans wing"] = {
+	name : "White as a Swan's Wing",
+	source : [["TPK", 49]],
+	description : "Add your Wis or Int to initiative instead of Dex. As a Ready action, you can use your reaction to use a spell to heal a creature in range that takes damage. [+1 Int or Wis]",
+	allowDuplicates: false,
+	choices : ["Intelligence","Wisdom",],
+	"intelligence" : {
+		name : "White as a Swan's Wing [Intelligence]",
+		addMod : { type : "skill", field : "Init", mod : "Int-Dex", text : "I can use my Intelligence modifier for initiative rolls." },
+	},
+	"wisdom" : {
+		name : "White as a Swan's Wing [Wisdom]",
+		addMod : { type : "skill", field : "Init", mod : "Wis-Dex", text : "I can use my Wisdom modifier for initiative rolls." } ,
+	},
+
+	scorestxt : "+1 Intelligence or Wisdom",
 };
 
 
