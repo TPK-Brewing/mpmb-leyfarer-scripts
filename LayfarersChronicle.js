@@ -3626,7 +3626,7 @@ FeatsList["white as a swans wing"] = {
 	source : [["TPK", 49]],
 	description : "Add your Wis or Int to initiative instead of Dex. As a Ready action, you can use your reaction to use a spell to heal a creature in range that takes damage. [+1 Int or Wis]",
 	allowDuplicates: false,
-	choices : ["Intelligence","Wisdom",],
+	choices : ["Keep Dex", "Intelligence","Wisdom",],
 	"intelligence" : {
 		name : "White as a Swan's Wing [Intelligence]",
 		addMod : { type : "skill", field : "Init", mod : "Int-Dex", text : "I can use my Intelligence modifier for initiative rolls." },
@@ -3634,6 +3634,9 @@ FeatsList["white as a swans wing"] = {
 	"wisdom" : {
 		name : "White as a Swan's Wing [Wisdom]",
 		addMod : { type : "skill", field : "Init", mod : "Wis-Dex", text : "I can use my Wisdom modifier for initiative rolls." } ,
+	},
+	"keep dex" : {
+		name : "White as a Swan's Wing [Keep Dex]",
 	},
 
 	scorestxt : "+1 Intelligence or Wisdom",
@@ -3736,6 +3739,28 @@ SpellsList["Squeeb’s Tenacious Tendrils"] = {
 		"difficult terrain.",
 		"At Higher Levels: When you cast this spell using a spell slot of 4th level or higher, the damage increases",
 		"by 1d6 for each slot level above 3rd.",
+	]),
+};
+
+SpellsList["Fiendish Brand"] = {
+	name : "Fiendish Brand",
+	classes : ["sorcerer", "warlock"],
+	source : [["TPK", 50]],
+	level : 4,
+	school : "Conj",
+	time : "1 a",
+	range : "60 ft",
+	components : "V,S,M",
+	duration : "Conc, 1 min",
+	save: "Con",
+	compMaterial : "A tattoo made from fiendish blood",
+	description : "1 crea learn res and immu. Start turn 6d6 fire dmg + disadv atk; save halves, no disadv + spell ends.",
+	descriptionFull : desc([
+		"When you cast the spell, you gain a new tattoo-like mark or an existing one grows, and you learn the ",
+		"target creature’s damage resistances and immunities. At the start of each of the target’s turns, ",
+		"it must make a Constitution saving throw. On a failure, the target takes 6d6 fire damage and has ",
+		"disadvantage on attack rolls it makes until the end of its turn. On a success, the target creature takes",
+		" half damage and the spell ends.",
 	]),
 };
 
@@ -3873,6 +3898,12 @@ MagicItemsList["mikiostro's beast tattoos"] = {
 		usages: 3,
 		recovery : "long rest"
 	},
+	'chimeric' : {
+		name: "Chimeric Beast Tattoo",
+		description : "+1d4 One saving throw daily",
+		usages: 1,
+		recovery : "long rest"
+	},
 };
 MagicItemsList["mikiostro's team tattoos"] = {
 	name : "(TPK) Mikiostro's Team Tattoos",
@@ -3880,7 +3911,7 @@ MagicItemsList["mikiostro's team tattoos"] = {
 	type : "wonderous item",
 	rarity : "rare",
 	allowDuplicates : false,
-	description : "While within 30 feet of another identical tattoo, regain 1 hit die after a short rest and if you have 2 negative death saves, make death saves at advantage.",
+	description : "While within 30 feet of another identical tattoo, regain 1 hit die after a short rest and if you have 2 negative death saves, make death saves at advantage. Gain +1 HP per person who has matching team tattoo.",
 };
 MagicItemsList["mikiostro's class tattoos"] = {
 	name : "(TPK) Mikiostro's Class Tattoos",
