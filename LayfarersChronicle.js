@@ -1319,6 +1319,7 @@ ClassList["tlc_ancestries"] = {
 			'aspect of the buried one' : {
 				name : "Aspect of the Buried One",
 				source : [["TPK", 19]],
+				submenu: "Divine Lineage",
 				description : " Your fingertips and other extremities blacken, as if perpetually covered in charcoal. You can cast spells without material components, unless a material component is consumed by the spell.",
 			},
 			'aspect of the burning one' :{
@@ -1472,7 +1473,8 @@ ClassList["tlc_ancestries"] = {
 				},
 				submenu: "Celestial Lineage",
 				description : " Bonus Action, choose one of the following:\n • Teleport to an unoccupied space within 30 feet of you that you can see. Must land within 5 feet of one of your allies.\n • A willing creature within 30 feet of you is magically teleported to an unoccupied space within 5 feet of you that you can see.",
-				usages : "Proficiency bonus per",
+				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 				action: ["bonus action", ""]
 			},
@@ -1486,7 +1488,8 @@ ClassList["tlc_ancestries"] = {
 				description : " Bonus Action, gain fly speed equal to walk speed, resistance to fire for 1 minute.",
 				speed : { fly : { spd : "walk", enc : 0 } },
 				dmgres : ["Fire", "Fire (when Plumage of the Sun activated)"],
-				usages : "Proficiency bonus per",
+				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 				action: ["bonus action", ""]
 			},
@@ -1522,7 +1525,8 @@ ClassList["tlc_ancestries"] = {
 					range : "Melee",
 					abilitytodamage : false,
 				},
-				usages : "Proficiency bonus per",
+				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 				action: ["bonus action", ""]
 			},
@@ -1543,7 +1547,8 @@ ClassList["tlc_ancestries"] = {
 				},
 				submenu: "Infernal Lineage",
 				description : " When you successfully charm a creature and that spell ends, you can chose for them to remain unaware they were charmed.",
-				usages : "Proficiency bonus per",
+				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 			},
 			'sanguine rubies' : {
@@ -1554,7 +1559,8 @@ ClassList["tlc_ancestries"] = {
 				},
 				submenu: "Infernal Lineage",
 				description : " When you make a saving throw against a spell, reaction to gain advantage on save. If you succeed, gain temp HP equal to twice your proficiency bonus.",
-				usages : "Proficiency bonus per",
+				usages : "Proficiency bonus per ",
+				usagescalc : "event.value = How('Proficiency Bonus');",
 				recovery : "long rest",
 				action: ["reaction", ""]
 			},
